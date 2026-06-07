@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare — Evansville Booking Sites</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { font-family: 'Inter', system-ui, sans-serif; }
+iframe { transition: all 0.3s ease; }
+.device-btn { transition: all 0.15s ease; }
+.device-btn:hover { transform: translateY(-1px); }
+.device-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+.side-label { position: absolute; top: 0; left: 0; right: 0; text-align: center; font-size: 0.75rem; font-weight: 600; padding: 4px; text-transform: uppercase; letter-spacing: 0.05em; z-index: 10; }
+.label-current { background: #f3f4f6; color: #6b7280; }
+.label-ours { background: #1e40af; color: white; }
+</style>
+</head>
+<body class="bg-gray-900 min-h-screen">
+<!-- Header -->
+<div class="bg-gray-900 border-b border-gray-700 px-4 py-3">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div>
+      <h1 class="text-xl font-bold text-white">Side-by-Side Comparison</h1>
+      <p class="text-sm text-gray-400">Their site vs. your new site — on any device</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <!-- Business selector -->
+      <select id="biz-select" class="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm">
+        <option value="">Select a business...</option>
+      </select>
+      <!-- Device selector -->
+      <div class="flex bg-gray-800 rounded-lg border border-gray-600 overflow-hidden">
+        <button class="device-btn active px-3 py-2 text-sm text-white" data-width="100%" data-label="Desktop" onclick="setDevice(this)">💻</button>
+        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="768px" data-label="Tablet" onclick="setDevice(this)">📱</button>
+        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="375px" data-label="Mobile" onclick="setDevice(this)">📲</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison frames -->
+<div class="max-w-7xl mx-auto px-4 py-4">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <!-- THEIR site -->
+    <div class="relative bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-700">
+      <div class="side-label label-current">🔴 THEIR CURRENT SITE</div>
+      <div class="mt-7 flex items-center justify-center bg-gray-100 text-xs text-gray-400 py-1" id="their-url-label">Loading...</div>
+      <div class="flex justify-center bg-gray-50">
+        <div id="their-container" style="width:100%;height:600px;overflow:auto;-webkit-overflow-scrolling:touch">
+          <iframe id="their-frame" src="" style="width:100%;height:1200px;border:none;transform-origin:top left;" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUR site -->
+    <div class="relative bg-white rounded-xl overflow-hidden shadow-2xl border border-blue-700">
+      <div class="side-label label-ours">🟢 THEIR NEW SITE (YOURS)</div>
+      <div class="mt-7 flex items-center justify-center bg-blue-50 text-xs text-blue-600 py-1 font-medium">
+        ✅ Online booking · Mobile-friendly · Customer dashboard · SEO optimized
+      </div>
+      <div class="flex justify-center bg-gray-50">
+        <div id="our-container" style="width:100%;height:600px;overflow:auto;-webkit-overflow-scrolling:touch">
+          <iframe id="our-frame" src="" style="width:100%;height:1200px;border:none;transform-origin:top left;" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Business info bar -->
+<div class="max-w-7xl mx-auto px-4 pb-6">
+  <div id="biz-info" class="hidden bg-gray-800 rounded-xl border border-gray-700 p-4 text-sm text-gray-300">
+    <div class="flex flex-wrap items-center gap-4">
+      <span id="biz-name" class="font-bold text-white"></span>
+      <span id="biz-category" class="bg-gray-700 px-2 py-0.5 rounded"></span>
+      <span id="biz-phone" class="text-blue-400"></span>
+      <a id="biz-their-link" target="_blank" class="text-gray-400 hover:text-white underline">View their site →</a>
+      <a id="biz-our-link" target="_blank" class="text-blue-400 hover:text-blue-300 underline">View your site →</a>
+    </div>
+    <div id="biz-comparison" class="mt-2 text-xs text-gray-500"></div>
+  </div>
+</div>
+
+<script>
+// Business database (from competitive audit)
+const BIZ = {
+  "completely-wired": { name: "Completely Wired", cat: "Electrical", phone: "(812) 476-9473", their: "https://completelywiredinc.com", theirScore: 4, ourBetter: true },
+  "schiff-air-conditioning-heating-inc": { name: "Schiff Air Conditioning & Heating Inc", cat: "HVAC", phone: "(812) 423-0056", their: "https://schiffair.com", theirScore: 5, ourBetter: true },
+  "hf-refrigeration-inc": { name: "HF Refrigeration Inc.", cat: "HVAC", phone: "(812) 618-3852", their: "https://hfrefrigeration.com", theirScore: 3, ourBetter: true },
+  "heads-construction": { name: "Heads Construction", cat: "Roofing", phone: "812-474-1669", their: "https://headsconstruction.com", theirScore: 5, ourBetter: true },
+  "bill-s-plumbing-service": { name: "Bill's Plumbing Service", cat: "Plumbing", phone: "N/A", their: "https://bills-plumbing.com", theirScore: 4, ourBetter: true },
+  "e-l-walters-air-conditioning-and-heating-inc": { name: "E. L. Walters Air Conditioning", cat: "HVAC", phone: "N/A", their: "https://elwalters.com", theirScore: 4, ourBetter: true },
+  "evansville-heating-and-air-conditioning": { name: "Evansville Heating and Air Conditioning", cat: "HVAC", phone: "812-618-2659", their: "https://evansvilleheatingandair.com", theirScore: 4, ourBetter: true },
+  "nellis-lawn-landscape": { name: "Nellis Lawn & Landscape", cat: "Lawn Care", phone: "N/A", their: "https://nellislandscaping.com", theirScore: 4, ourBetter: true },
+  "mcmahon-exterminating": { name: "McMahon Exterminating", cat: "Pest Control", phone: "N/A", their: "https://mcmahoncan.com", theirScore: 6, ourBetter: true },
+  "gary-s-plumbing-service-inc": { name: "Gary's Plumbing Service Inc", cat: "Plumbing", phone: "(812) 471-3788", their: "https://garysplumbingservice.com", theirScore: 4, ourBetter: true },
+  "roto-rooter-evansville": { name: "Roto-Rooter Evansville", cat: "Plumbing", phone: "812-422-3184", their: "https://rotorooter.com", theirScore: 8, ourBetter: false },
+  "oxbow-electric-llc": { name: "Oxbow Electric, LLC", cat: "Electrical", phone: "(812) 431-8988", their: "https://oxbowelectric.com", theirScore: 7, ourBetter: false },
+  "a-derr-heating-cooling": { name: "A+ Derr Heating & Cooling", cat: "HVAC", phone: "833-232-4328", their: "https://aplusderr.com", theirScore: 7, ourBetter: false },
+};
+
+const OUR_BASE = "https://kexemi.github.io/evansville-booking-sites/apps";
+
+// Populate business selector
+const select = document.getElementById('biz-select');
+const sorted = Object.entries(BIZ).sort((a, b) => a[1].name.localeCompare(b[1].name));
+for (const [slug, biz] of sorted) {
+  const opt = document.createElement('option');
+  opt.value = slug;
+  opt.textContent = biz.name + ' (' + biz.cat + ')';
+  select.appendChild(opt);
+}
+
+// Load from URL param
+const params = new URLSearchParams(window.location.search);
+const initialBiz = params.get('biz');
+if (initialBiz && BIZ[initialBiz]) {
+  select.value = initialBiz;
+  loadBiz(initialBiz);
+}
+
+select.addEventListener('change', function() {
+  if (this.value) loadBiz(this.value);
+});
+
+function loadBiz(slug) {
+  const biz = BIZ[slug];
+  if (!biz) return;
+  
+  // Update frames
+  document.getElementById('their-frame').src = biz.their;
+  document.getElementById('our-frame').src = OUR_BASE + '/' + slug + '-booking.html';
+  document.getElementById('their-url-label').textContent = '🌐 ' + biz.their;
+  
+  // Update biz info
+  document.getElementById('biz-name').textContent = biz.name;
+  document.getElementById('biz-category').textContent = biz.cat;
+  document.getElementById('biz-phone').textContent = biz.phone;
+  document.getElementById('biz-their-link').href = biz.their;
+  document.getElementById('biz-our-link').href = OUR_BASE + '/' + slug + '-booking.html';
+  
+  const comp = document.getElementById('biz-comparison');
+  if (biz.ourBetter) {
+    comp.innerHTML = '✅ <strong>Our site is better.</strong> Their current site scores ' + biz.theirScore + '/10. Yours has online booking, mobile optimization, and a customer dashboard.';
+  } else {
+    comp.innerHTML = '⚠️ Their current site scores ' + biz.theirScore + '/10 — it\'s competitive. But it likely lacks online booking. That\'s your edge.';
+  }
+  
+  document.getElementById('biz-info').classList.remove('hidden');
+  
+  // Update page URL without reload
+  const url = new URL(window.location);
+  url.searchParams.set('biz', slug);
+  window.history.replaceState({}, '', url);
+}
+
+function setDevice(btn) {
+  document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active', 'text-white'));
+  btn.classList.add('active', 'text-white');
+  
+  const width = btn.dataset.width;
+  const container = document.querySelector('.grid');
+  
+  if (width === '100%') {
+    document.getElementById('their-container').style.width = '100%';
+    document.getElementById('our-container').style.width = '100%';
+    container.classList.remove('justify-center');
+  } else {
+    document.getElementById('their-container').style.width = width;
+    document.getElementById('our-container').style.width = width;
+    container.classList.add('justify-center');
+  }
+}
+</script>
+</body>
+</html>
