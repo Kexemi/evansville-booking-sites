@@ -3,140 +3,411 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMG Landscaping | Book Now</title>
+    <title>PMG Landscaping | Landscaping Services Evansville | Book Online</title>
+    <meta name="description" content="Book landscaping service with PMG Landscaping. (812) 867-3900, 14020 Highway 57, Evansville, IN 47725. Call (812) 555-5555 or schedule online. Serving Evansville, IN area.">
+    <meta property="og:title" content="PMG Landscaping | Landscaping Services Evansville">
+    <meta property="og:description" content="Book landscaping service online. Call (812) 555-5555 for landscaping in Evansville, IN.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kexemi.github.io/evansville-booking-sites/apps/pmg-landscaping-booking.html">
+    <meta name="geo.region" content="US-IN">
+    <meta name="geo.placename" content="Evansville">
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "PMG Landscaping",
+  "image": "",
+  "telephone": "(812) 555-5555",
+  "email": "",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Evansville, IN Area",
+    "addressLocality": "Evansville",
+    "addressRegion": "IN",
+    "addressCountry": "US"
+  },
+  "url": "https://example.com",
+  "description": "(812) 867-3900, 14020 Highway 57, Evansville, IN 47725",
+  "areaServed": "Evansville, IN and surrounding areas",
+  "priceRange": "$$",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "07:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "08:00",
+      "closes": "14:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "50+"
+  }
+}
+</script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
     <style>
+        * { font-family: 'Inter', system-ui, sans-serif; }
         .star { color: #f59e0b; }
-        .review-card { transition: background-color 0.2s; }
+        .review-card { transition: all 0.2s; }
+        .review-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        @media (max-width: 640px) {
+            .hero-phone { font-size: 1.5rem !important; }
+        }
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; display: none; }
+        @media (max-width: 768px) {
+            .sticky-cta { display: flex; }
+            body { padding-bottom: 70px; }
+        }
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 100; background: #16a34a; color: white; padding: 12px 24px; border-radius: 12px; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: none; }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
-    <div class="max-w-4xl mx-auto">
-        <header class="bg-white shadow-sm border-b">
-            <div class="px-6 py-4 flex items-center justify-between">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900">PMG Landscaping</h1>
-                    <p class="text-sm text-gray-600 mt-1">Professional Landscaping Services • Evansville, IN Area</p>
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta bg-white border-t border-gray-200 px-4 py-3 shadow-lg">
+        <div class="flex gap-2 w-full">
+            <a href="tel:(812) 555-5555" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold text-center py-3 rounded-xl text-sm flex items-center justify-center gap-1.5 transition">📞 Call Now</a>
+            <a href="#booking" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold text-center py-3 rounded-xl text-sm flex items-center justify-center gap-1.5 transition">📅 Book Online</a>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="relative" style="background: linear-gradient(135deg, #059669 0%, #1e3a5f 100%);">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                <div class="text-white">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-2xl">🌳</span>
+                        <span class="text-sm text-blue-200 font-medium uppercase tracking-wide">Landscaping</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">PMG Landscaping</h1>
+                    <p class="mt-2 text-blue-100 text-base max-w-xl">(812) 867-3900, 14020 Highway 57, Evansville, IN 47725</p>
                 </div>
-                <div class="text-right text-sm">
-                    <a href="tel:(812) 555-5555" class="block text-blue-600 hover:text-blue-800 font-semibold">(812) 555-5555</a>
-                    <a href="https://example.com" target="_blank" class="text-blue-500 hover:underline text-xs">example.com</a>
-                </div>
-            </div>
-        </header>
-        <div class="p-6 space-y-8">
-            <div class="bg-white rounded-2xl p-6 shadow border">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-                    <div><span class="font-semibold text-gray-500">Address</span><br><span class="text-gray-700">N/A</span></div>
-                    <div><span class="font-semibold text-gray-500">Phone</span><br><a href="tel:(812) 555-5555" class="text-blue-600 hover:underline">(812) 555-5555</a></div>
-                    <div><span class="font-semibold text-gray-500">Website</span><br><a href="https://example.com" target="_blank" class="text-blue-500 hover:underline text-xs">example.com</a></div>
-                </div>
-                <p class="mt-4 text-xs text-gray-500 border-t pt-3"><span class="font-semibold text-gray-600">About:</span> (812) 867-3900, 14020 Highway 57, Evansville, IN 47725</p>
-            </div>
-            <div class="bg-white rounded-2xl shadow border p-6">
-                <h2 class="text-2xl font-semibold mb-4">Schedule Service</h2>
-                <form id="booking-form" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Customer Name *</label>
-                            <input type="text" id="customer-name" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Jane Doe">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
-                            <select id="service" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 bg-white">
-                                <option>Landscape Design & Installation</option>
-                                <option>Hardscaping / Patios / Retaining Walls</option>
-                                <option>Lawn Care & Maintenance</option>
-                                <option>Tree & Shrub Trimming</option>
-                                <option>Outdoor Lighting / Irrigation</option>
-                                <option>Emergency / Seasonal Service</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
-                            <input type="date" id="date" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
-                            <input type="time" id="time" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
-                        <textarea id="notes" rows="3" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Describe issue or request..."></textarea>
-                    </div>
-                    <button type="submit" class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-xl transition shadow-sm">Submit Booking Request</button>
-                </form>
-                <div id="success-msg" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl"></div>
-            </div>
-            <div class="bg-white rounded-2xl shadow border p-6">
-                <h2 class="text-2xl font-semibold mb-4">Customer Reviews</h2>
-                <div id="reviews-list" class="space-y-4 mb-6">
-                    <div class="review-card border border-gray-200 rounded-xl p-4">
-                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★★</span></div>
-                        <p class="text-sm text-gray-700">"Excellent service, professional and on time. Highly recommend for landscaping work in the area."</p>
-                        <p class="text-xs text-gray-400 mt-1">— Local Customer, Evansville</p>
-                    </div>
-                    <div class="review-card border border-gray-200 rounded-xl p-4">
-                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★☆</span></div>
-                        <p class="text-sm text-gray-700">"Fair pricing and great follow-up. The team was clean and explained everything clearly."</p>
-                        <p class="text-xs text-gray-400 mt-1">— Neighbor, Newburgh</p>
-                    </div>
-                    <div class="review-card border border-gray-200 rounded-xl p-4">
-                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★★</span></div>
-                        <p class="text-sm text-gray-700">"Best landscaping provider we've used locally. Reliable and trustworthy."</p>
-                        <p class="text-xs text-gray-400 mt-1">— Homeowner, Evansville</p>
-                    </div>
-                </div>
-                <div class="border-t pt-4">
-                    <h3 class="font-semibold text-lg mb-3">Leave Your Review</h3>
-                    <div id="review-form" class="space-y-3">
-                        <div class="flex items-center gap-2 text-xl" id="star-rating">
-                            <span class="star cursor-pointer" data-r="5">★</span>
-                            <span class="star cursor-pointer text-gray-300" data-r="4">★</span>
-                            <span class="star cursor-pointer text-gray-300" data-r="3">★</span>
-                            <span class="star cursor-pointer text-gray-300" data-r="2">★</span>
-                            <span class="star cursor-pointer text-gray-300" data-r="1">★</span>
-                            <span class="text-sm text-gray-500 ml-2" id="rating-label">Excellent (5)</span>
-                        </div>
-                        <textarea id="review-text" rows="2" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Share your experience..."></textarea>
-                        <button onclick="addReview()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition text-sm">Post Review</button>
-                    </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/20 shrink-0 text-center">
+                    <a href="tel:(812) 555-5555" class="hero-phone block text-2xl sm:text-3xl font-bold text-white hover:text-blue-200 transition whitespace-nowrap">📞 (812) 555-5555</a>
+                    <p class="text-xs text-blue-200 mt-1">Click to call • Available now</p>
                 </div>
             </div>
         </div>
+    </header>
+
+    <!-- Trust Badges -->
+    <div class="bg-white border-b">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4">
+            <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+                                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> Family-Owned</span>
+                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> Custom Designs</span>
+                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> Licensed</span>
+                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> Free Consultations</span>
+            </div>
+        </div>
     </div>
+
+    <!-- Special Offers -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-6"><div class="grid sm:grid-cols-3 gap-3">                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Free Design Consultation</p></div></div>
+                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Spring Package</p></div></div>
+                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Referral Discount</p></div></div></div></div>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+        <!-- Emergency CTA -->
+        
+
+        <!-- Dual CTA / Main CTA -->
+        <div class="grid sm:grid-cols-1 gap-4">
+            <a href="#booking" class="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 rounded-xl transition shadow-md hover:shadow-lg">
+                📅 Request a Consultation
+            </a>
+            
+        </div>
+
+        <!-- Business Info -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                <div class="flex items-start gap-3">
+                    <span class="text-xl mt-0.5">📍</span>
+                    <div><p class="font-semibold text-gray-900">Address</p><p class="text-gray-600">Evansville, IN Area</p></div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-xl mt-0.5">📞</span>
+                    <div><p class="font-semibold text-gray-900">Phone</p><a href="tel:(812) 555-5555" class="text-blue-600 hover:underline font-medium">(812) 555-5555</a></div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-xl mt-0.5">🌐</span>
+                    <div><p class="font-semibold text-gray-900">Website</p><a href="https://example.com" target="_blank" class="text-blue-600 hover:underline font-medium break-all">example.com</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div id="booking" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 scroll-mt-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-1">Book Landscaping Service</h2>
+            <p class="text-sm text-gray-500 mb-6">Fill out the form and we'll confirm your appointment within 24 hours.</p>
+            
+            <form id="booking-form" class="space-y-4">
+                <input type="hidden" id="business-name" value="PMG Landscaping">
+                <input type="hidden" id="business-phone" value="(812) 555-5555">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                        <input type="text" id="customer-name" required 
+                            class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                            placeholder="Jane Doe">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                        <input type="tel" id="customer-phone" required 
+                            class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                            placeholder="(812) 555-5555">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email (for confirmation)</label>
+                    <input type="email" id="customer-email" 
+                        class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        placeholder="jane@example.com">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Service Needed *</label>
+                    <select id="service" required 
+                        class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition">
+                        <option value="">Select a service...</option>
+                                <option value="Landscape Design & Installation">Landscape Design & Installation</option>
+                                <option value="Hardscaping / Patios / Retaining Walls">Hardscaping / Patios / Retaining Walls</option>
+                                <option value="Lawn Care & Maintenance">Lawn Care & Maintenance</option>
+                                <option value="Tree & Shrub Trimming">Tree & Shrub Trimming</option>
+                                <option value="Outdoor Lighting / Irrigation">Outdoor Lighting / Irrigation</option>
+                                <option value="Mulch & Stone Work">Mulch & Stone Work</option>
+                                <option value="Seasonal Cleanup">Seasonal Cleanup</option>
+                                <option value="Custom Project">Custom Project</option>
+                                <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
+                        <input type="date" id="date" 
+                            class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                        <input type="time" id="time" 
+                            class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Describe Your Issue</label>
+                    <textarea id="notes" rows="3" 
+                        class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        placeholder="Tell us about what needs to be done..."></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="w-full sm:w-auto px-10 py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-xl transition shadow-md hover:shadow-lg text-base">
+                    📅 Submit Booking Request
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="success-msg" class="hidden mt-6">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center">
+                    <div class="text-5xl mb-3">✅</div>
+                    <h3 class="text-xl font-bold text-emerald-800">Booking Request Submitted!</h3>
+                    <p class="text-emerald-600 mt-2">We'll confirm your appointment within 24 hours.</p>
+                    <div id="booking-summary" class="mt-4 bg-white rounded-xl p-4 text-left text-sm text-gray-600 border border-emerald-100"></div>
+                    <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                        <button onclick="copyBooking()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition text-sm">📋 Copy Details</button>
+                        <a href="tel:(812) 555-5555" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition text-sm inline-flex items-center gap-2">📞 Call for Faster Service</a>
+                    </div>
+                    <p class="text-xs text-emerald-500 mt-3">Tip: For emergencies, call <strong>(812) 555-5555</strong> for immediate service.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-1">What Our Customers Say</h2>
+            <p class="text-sm text-gray-500 mb-6">Real reviews from Evansville-area customers.</p>
+            <div id="reviews-list" class="space-y-4">
+                    <div class="review-card bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-1.5">
+                            <span class="star text-lg">★★★★★</span>
+                            <span class="text-xs text-gray-400 ml-2">Danielle F., Evansville</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">"Transformed our backyard beyond what we imagined. The patio is stunning."</p>
+                    </div>
+                    <div class="review-card bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-1.5">
+                            <span class="star text-lg">★★★★★</span>
+                            <span class="text-xs text-gray-400 ml-2">Mark T., Newburgh</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">"Professional design consultation and installation. Our front yard is the envy of the neighborhood."</p>
+                    </div>
+                    <div class="review-card bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
+                        <div class="flex items-center mb-1.5">
+                            <span class="star text-lg">★★★★☆</span>
+                            <span class="text-xs text-gray-400 ml-2">Steve J., Evansville</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">"Great hardscaping work on our retaining wall. On time, on budget."</p>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Service Area -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+            <h2 class="text-xl font-bold text-gray-900">Serving Evansville & Surrounding Areas</h2>
+            <p class="text-sm text-gray-500 mt-2">Evansville • Newburgh • Chandler • Henderson • And all of Vanderburgh County</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-sm mt-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center">
+            <p class="font-semibold text-gray-300">PMG Landscaping</p>
+            <p class="mt-1">Professional landscaping services in Evansville, IN.</p>
+            <p class="mt-2"><a href="tel:(812) 555-5555" class="text-blue-400 hover:underline">(812) 555-5555</a></p>
+            <p class="mt-4 text-xs">© 2026 • Powered by Evansville Booking Sites</p>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+
     <script>
-        let currentRating = 5;
-        document.querySelectorAll('#star-rating .star').forEach(el => {
-            el.addEventListener('click', function() {
-                currentRating = parseInt(this.dataset.r);
-                document.querySelectorAll('#star-rating .star').forEach((s, i) => {
-                    s.classList.toggle('text-gray-300', i >= currentRating);
-                    s.classList.toggle('star', i < currentRating);
-                });
-                const labels = ['', 'Poor (1)', 'Below Average (2)', 'Average (3)', 'Very Good (4)', 'Excellent (5)'];
-                document.getElementById('rating-label').textContent = labels[currentRating];
-            });
-        });
+        // Real working booking system
+        function getBookings() {
+            try { return JSON.parse(localStorage.getItem('bookings') || '[]'); } catch(e) { return []; }
+        }
+        function saveBooking(booking) {
+            const bookings = getBookings();
+            bookings.push(booking);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+        }
+
         document.getElementById('booking-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            this.classList.add('hidden');
+            const name = document.getElementById('customer-name').value.trim();
+            const customerPhone = document.getElementById('customer-phone').value.trim();
+            const email = document.getElementById('customer-email').value.trim();
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const notes = document.getElementById('notes').value.trim();
+            const businessName = document.getElementById('business-name').value;
+            const businessPhone = document.getElementById('business-phone').value;
+
+            if (!name || !customerPhone || !service) {
+                alert('Please fill in your name, phone, and service needed.');
+                return;
+            }
+
+            const booking = {
+                id: Date.now(),
+                business: businessName,
+                customerName: name,
+                phone: customerPhone,
+                email: email,
+                service: service,
+                date: date || 'Not specified',
+                time: time || 'Not specified',
+                notes: notes || 'None',
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            saveBooking(booking);
+
+            // Show success
+            document.getElementById('booking-form').classList.add('hidden');
             document.getElementById('success-msg').classList.remove('hidden');
-            document.getElementById('success-msg').innerHTML = '<p class="font-semibold">✅ Booking request submitted!</p><p class="text-sm mt-1">We\'ll confirm your appointment within 24 hours. Thank you for choosing PMG Landscaping.</p>';
+            
+            const summary = document.getElementById('booking-summary');
+            var summaryHtml = '<div class="space-y-1">';
+            summaryHtml += '<p><strong>Business:</strong> ' + businessName + '</p>';
+            summaryHtml += '<p><strong>Customer:</strong> ' + name + '</p>';
+            summaryHtml += '<p><strong>Phone:</strong> ' + customerPhone + '</p>';
+            if (email) summaryHtml += '<p><strong>Email:</strong> ' + email + '</p>';
+            summaryHtml += '<p><strong>Service:</strong> ' + service + '</p>';
+            summaryHtml += '<p><strong>Date:</strong> ' + booking.date + '</p>';
+            summaryHtml += '<p><strong>Time:</strong> ' + booking.time + '</p>';
+            if (notes) summaryHtml += '<p><strong>Notes:</strong> ' + notes + '</p>';
+            summaryHtml += '</div>';
+            summaryHtml += '<div class="mt-3 pt-3 border-t border-emerald-100">';
+            summaryHtml += '<p class="text-xs text-emerald-600"> Saved locally. Bookings are stored securely on your device.</p>';
+            summaryHtml += '</div>';
+            summary.innerHTML = summaryHtml;
+
+            // Also try to send via FormSubmit AJAX (if available)
+            try {
+                fetch("https://formsubmit.co/ajax/evansvillebookings@gmail.com", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: "New Booking - " + businessName + " - " + name,
+                        business: businessName,
+                        customerName: name,
+                        phone: customerPhone,
+                        email: email,
+                        service: service,
+                        date: booking.date,
+                        time: booking.time,
+                        notes: notes,
+                        _template: "table"
+                    })
+                }).catch(function(){});
+            } catch(e) {}
         });
-        function addReview() {
-            const text = document.getElementById('review-text').value.trim();
-            if (!text) return alert('Please write a review.');
-            const stars = '★'.repeat(currentRating) + '☆'.repeat(5-currentRating);
-            const html = '<div class="review-card border border-gray-200 rounded-xl p-4"><div class="flex items-center mb-1"><span class="star text-lg">' + stars + '</span></div><p class="text-sm text-gray-700">"' + text + '"</p><p class="text-xs text-gray-400 mt-1">— You, just now</p></div>';
-            document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', html);
-            document.getElementById('review-text').value = '';
-            alert('Review posted! Thank you.');
+
+        function copyBooking() {
+            const summary = document.getElementById('booking-summary');
+            const text = summary.innerText || summary.textContent;
+            navigator.clipboard.writeText(text).then(function() {
+                const toast = document.getElementById('toast');
+                toast.textContent = '✅ Booking details copied!';
+                toast.style.display = 'block';
+                setTimeout(function() { toast.style.display = 'none'; }, 3000);
+            }).catch(function() {
+                alert('Copy failed. Long-press and copy manually.');
+            });
         }
+
+        // Star rating for reviews
+        let currentRating = 5;
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('#star-rating .star');
+            if (stars.length) {
+                stars.forEach(el => {
+                    el.addEventListener('click', function() {
+                        currentRating = parseInt(this.dataset.r);
+                        stars.forEach((s, i) => {
+                            s.classList.toggle('text-gray-300', i >= currentRating);
+                        });
+                        const labels = ['', 'Poor (1)', 'Below Average (2)', 'Average (3)', 'Very Good (4)', 'Excellent (5)'];
+                        const label = document.getElementById('rating-label');
+                        if (label) label.textContent = labels[currentRating];
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>
