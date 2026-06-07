@@ -33,9 +33,9 @@ iframe { transition: all 0.3s ease; }
       </select>
       <!-- Device selector -->
       <div class="flex bg-gray-800 rounded-lg border border-gray-600 overflow-hidden">
-        <button class="device-btn active px-3 py-2 text-sm text-white" data-width="100%" data-label="Desktop" onclick="setDevice(this)">💻</button>
-        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="768px" data-label="Tablet" onclick="setDevice(this)">📱</button>
-        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="375px" data-label="Mobile" onclick="setDevice(this)">📲</button>
+        <button class="device-btn active px-3 py-2 text-sm text-white" onclick="setDevice(this, window.innerWidth)" data-label="Desktop">💻</button>
+        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" onclick="setDevice(this, 768)" data-label="Tablet">📱</button>
+        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" onclick="setDevice(this, 375)" data-label="Mobile">📲</button>
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@ iframe { transition: all 0.3s ease; }
     <div class="relative bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-700">
       <div class="side-label label-current">🔴 THEIR CURRENT SITE</div>
       <div class="mt-7 flex items-center justify-center bg-gray-100 text-xs text-gray-400 py-1" id="their-url-label">Loading...</div>
-      <div class="flex justify-center bg-gray-50">
-        <div id="their-container" style="width:100%;height:600px;overflow:auto;-webkit-overflow-scrolling:touch">
-          <iframe id="their-frame" src="" style="width:100%;height:1200px;border:none;transform-origin:top left;" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
+      <div class="flex justify-center bg-gray-50" style="overflow:hidden;height:600px">
+        <div id="their-container" style="width:100%;height:100%;overflow:hidden;display:flex;align-items:flex-start;justify-content:center">
+          <iframe id="their-frame" src="" style="border:none;transform-origin:top center;" sandbox="allow-scripts allow-same-origin" loading="lazy" onload="resizeFrame(this, 'their')"></iframe>
         </div>
       </div>
     </div>
@@ -61,9 +61,9 @@ iframe { transition: all 0.3s ease; }
       <div class="mt-7 flex items-center justify-center bg-blue-50 text-xs text-blue-600 py-1 font-medium">
         ✅ Online booking · Mobile-friendly · Customer dashboard · SEO optimized
       </div>
-      <div class="flex justify-center bg-gray-50">
-        <div id="our-container" style="width:100%;height:600px;overflow:auto;-webkit-overflow-scrolling:touch">
-          <iframe id="our-frame" src="" style="width:100%;height:1200px;border:none;transform-origin:top left;" loading="lazy"></iframe>
+      <div class="flex justify-center bg-gray-50" style="overflow:hidden;height:600px">
+        <div id="our-container" style="width:100%;height:100%;overflow:hidden;display:flex;align-items:flex-start;justify-content:center">
+          <iframe id="our-frame" src="" style="border:none;transform-origin:top center;" loading="lazy" onload="resizeFrame(this, 'our')"></iframe>
         </div>
       </div>
     </div>
@@ -85,7 +85,31 @@ iframe { transition: all 0.3s ease; }
 </div>
 
 <script>
-// Business database (from competitive audit)
+// Frame dimensions
+const FRAME_W = 1400;
+
+function resizeFrame(frame, side) {
+  const container = frame.parentElement;
+  const containerW = container.clientWidth;
+  if (containerW < 100) return;
+  const scale = Math.min(containerW / FRAME_W, 1);
+  frame.style.width = FRAME_W + 'px';
+  frame.style.height = (600 / scale) + 'px';
+  frame.style.transform = 'scale(' + scale + ')';
+  const offset = (containerW - FRAME_W * scale) / 2;
+  frame.style.marginLeft = offset + 'px';
+}
+
+function setDevice(btn, width) {
+  document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active', 'text-white'));
+  btn.classList.add('active', 'text-white');
+  document.getElementById('their-frame').style.width = width + 'px';
+  document.getElementById('our-frame').style.width = width + 'px';
+  ['their', 'our'].forEach(side => {
+    const frame = document.getElementById(side + '-frame');
+    if (frame && frame.src) resizeFrame(frame, side);
+  });
+}
 const BIZ = {
   "completely-wired": { name: "Completely Wired", cat: "Electrical", phone: "(812) 476-9473", their: "https://completelywiredinc.com", theirScore: 4, ourBetter: true },
   "schiff-air-conditioning-heating-inc": { name: "Schiff Air Conditioning & Heating Inc", cat: "HVAC", phone: "(812) 423-0056", their: "https://schiffair.com", theirScore: 5, ourBetter: true },
@@ -124,6 +148,16 @@ if (initialBiz && BIZ[initialBiz]) {
 
 select.addEventListener('change', function() {
   if (this.value) loadBiz(this.value);
+});
+
+// Resize frames on window resize
+window.addEventListener('resize', function() {
+  ['their', 'our'].forEach(side => {
+    const frame = document.getElementById(side + '-frame');
+    if (frame && frame.src && frame.src !== window.location.href) {
+      resizeFrame(frame, side);
+    }
+  });
 });
 
 function loadBiz(slug) {
