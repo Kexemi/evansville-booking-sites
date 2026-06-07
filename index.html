@@ -21,21 +21,23 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
                 <div class="max-w-2xl">
                     <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Your Business.<br>Online. Today.</h1>
-                    <p class="mt-4 text-lg text-blue-100 max-w-xl">Professional booking websites for Evansville-area service businesses. Built in hours, not weeks. Customized with your services, reviews, and contact info.</p>
+                    <p class="mt-4 text-lg text-blue-100 max-w-xl">Professional booking websites for Evansville-area service businesses. Built in hours, not weeks. 71 local businesses already have their site ready.</p>
                     <div class="mt-8 flex flex-wrap gap-3">
                         <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">✓ Booking form</span>
                         <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">✓ Customer reviews</span>
                         <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">✓ Mobile-friendly</span>
                         <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">✓ Click-to-call</span>
+                        <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">✓ Free hosting</span>
                     </div>
                 </div>
                 <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 shrink-0">
                     <p class="text-3xl font-bold">Starting at</p>
                     <p class="text-5xl font-extrabold mt-1">$497</p>
                     <p class="text-sm text-blue-200 mt-1">one-time setup, no hidden fees</p>
-                    <div class="mt-4 pt-4 border-t border-white/20">
+                    <div class="mt-4 pt-4 border-t border-white/20 space-y-1">
                         <p class="text-sm"><span class="font-semibold">Pro:</span> $997 with custom domain + SEO</p>
-                        <p class="text-sm mt-1"><span class="font-semibold">Bundle:</span> $1,497 with AI phone agent</p>
+                        <p class="text-sm"><span class="font-semibold">Bundle:</span> $1,497 with 24/7 AI phone agent</p>
+                        <p class="text-sm"><span class="font-semibold">Hosting:</span> Just $97/mo after setup</p>
                     </div>
                 </div>
             </div>
@@ -46,149 +48,187 @@
     <section class="bg-white border-b">
         <div class="max-w-6xl mx-auto px-6 py-10">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div><p class="text-3xl font-bold text-blue-600">13</p><p class="text-sm text-gray-500 mt-1">Websites Built</p></div>
-                <div><p class="text-3xl font-bold text-blue-600">7</p><p class="text-sm text-gray-500 mt-1">Industries Served</p></div>
+                <div><p class="text-3xl font-bold text-blue-600">71</p><p class="text-sm text-gray-500 mt-1">Websites Built</p></div>
+                <div><p class="text-3xl font-bold text-blue-600">8</p><p class="text-sm text-gray-500 mt-1">Industries Served</p></div>
                 <div><p class="text-3xl font-bold text-blue-600">$0</p><p class="text-sm text-gray-500 mt-1">Monthly Platform Fee</p></div>
                 <div><p class="text-3xl font-bold text-blue-600">24h</p><p class="text-sm text-gray-500 mt-1">Typical Turnaround</p></div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio -->
+    <!-- Category Index -->
     <section class="max-w-6xl mx-auto px-6 py-16">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Live Demo Sites</h2>
-        <p class="text-gray-500 mb-8">Click any site to see a working booking website for an Evansville-area business. Your business could be next.</p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Find Your Industry</h2>
+        <p class="text-gray-500 mb-8">71 local businesses already have a professional booking website ready. Click your industry to see them.</p>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- HVAC -->
-            <a href="apps/schiff-air-conditioning-heating-inc-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-orange-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-full">HVAC</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Schiff Air Conditioning & Heating Inc</h3>
-                    <p class="text-sm text-gray-500 mt-1">39 years serving Evansville</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📞</span><span class="ml-2">(812) 423-0056</span></div>
-                </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12" id="category-grid">
+            <a href="#hvac" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-2xl mx-auto">❄️</div>
+                <h3 class="font-bold text-gray-900 mt-2">HVAC</h3>
+                <p class="text-sm text-gray-500">17 websites ready</p>
             </a>
+            <a href="#plumbing" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🔧</div>
+                <h3 class="font-bold text-gray-900 mt-2">Plumbing</h3>
+                <p class="text-sm text-gray-500">10 websites ready</p>
+            </a>
+            <a href="#lawn-care" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🌿</div>
+                <h3 class="font-bold text-gray-900 mt-2">Lawn Care</h3>
+                <p class="text-sm text-gray-500">7 websites ready</p>
+            </a>
+            <a href="#landscaping" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🌳</div>
+                <h3 class="font-bold text-gray-900 mt-2">Landscaping</h3>
+                <p class="text-sm text-gray-500">8 websites ready</p>
+            </a>
+            <a href="#electrical" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center text-2xl mx-auto">⚡</div>
+                <h3 class="font-bold text-gray-900 mt-2">Electrical</h3>
+                <p class="text-sm text-gray-500">6 websites ready</p>
+            </a>
+            <a href="#roofing" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-red-100 text-red-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🏠</div>
+                <h3 class="font-bold text-gray-900 mt-2">Roofing</h3>
+                <p class="text-sm text-gray-500">9 websites ready</p>
+            </a>
+            <a href="#painting" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🎨</div>
+                <h3 class="font-bold text-gray-900 mt-2">Painting</h3>
+                <p class="text-sm text-gray-500">7 websites ready</p>
+            </a>
+            <a href="#pest-control" class="card-hover bg-white rounded-xl border border-gray-200 p-5 text-center">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-lg flex items-center justify-center text-2xl mx-auto">🐜</div>
+                <h3 class="font-bold text-gray-900 mt-2">Pest Control</h3>
+                <p class="text-sm text-gray-500">7 websites ready</p>
+            </a>
+        </div>
 
-            <a href="apps/a-derr-heating-cooling-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-orange-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-full">HVAC</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">A+ Derr Heating & Cooling</h3>
-                    <p class="text-sm text-gray-500 mt-1">49 years, 24hr emergency service</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📞</span><span class="ml-2">833-232-4328</span></div>
-                </div>
-            </a>
+        <!-- Category sections -->
+        <div id="hvac" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center text-lg">❄️</div><h3 class="text-2xl font-bold text-gray-900">HVAC (17)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/schiff-air-conditioning-heating-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Schiff Air Conditioning & Heating Inc</p><p class="text-xs text-gray-400">39 yrs • (812) 423-0056</p></div></a>
+                <a href="apps/a-derr-heating-cooling-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">A+ Derr Heating & Cooling</p><p class="text-xs text-gray-400">49 yrs • 24hr • 833-232-4328</p></div></a>
+                <a href="apps/e-l-walters-air-conditioning-and-heating-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">E. L. Walters Air Conditioning</p><p class="text-xs text-gray-400">HVAC + restaurant equipment</p></div></a>
+                <a href="apps/j-e-shekell-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">J.E. Shekell</p><p class="text-xs text-gray-400">Multi-service (HVAC/Plumb/Elect)</p></div></a>
+                <a href="apps/evansville-heating-and-air-conditioning-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Evansville Heating & Air Conditioning</p><p class="text-xs text-gray-400">812-618-2659 • Resi/commercial</p></div></a>
+                <a href="apps/perfection-heating-air-conditioning-refrigeration-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Perfection Heating & Air Conditioning</p><p class="text-xs text-gray-400">76 yrs • (812) 508-8387</p></div></a>
+                <a href="apps/lappe-heating-air-conditioning-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Lappe Heating & Air Conditioning</p><p class="text-xs text-gray-400">Carrier rebates</p></div></a>
+                <a href="apps/ray-s-heating-air-conditioning-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Ray's Heating & Air Conditioning</p><p class="text-xs text-gray-400">46 yrs • (812) 423-7459</p></div></a>
+                <a href="apps/brackett-heating-and-air-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Brackett Heating And Air</p><p class="text-xs text-gray-400">77 yrs • (812) 476-1138</p></div></a>
+                <a href="apps/hf-refrigeration-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">HF Refrigeration Inc.</p><p class="text-xs text-gray-400">25 yrs • (812) 618-3852</p></div></a>
+                <a href="apps/nunning-heating-air-conditioning-refrigeration-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Nunning Heating & Air Conditioning</p><p class="text-xs text-gray-400">29 yrs • 24hr • (812) 421-8899</p></div></a>
+                <a href="apps/baylor-heating-air-conditioning-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Baylor Heating & Air Conditioning Inc</p><p class="text-xs text-gray-400">42 yrs • (812) 425-8435</p></div></a>
+                <a href="apps/schweizer-s-heating-air-conditioning-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Schweizer's Heating & Air Conditioning</p><p class="text-xs text-gray-400">37 yrs • 24hr • (812) 423-1177</p></div></a>
+                <a href="apps/schmitt-refrigeration-air-conditioning-heating-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Schmitt Refrigeration, AC & Heating</p><p class="text-xs text-gray-400">58 yrs • (812) 301-1009</p></div></a>
+                <a href="apps/a-a-precision-heating-cooling-refrigeration-llc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">A & A Precision Heating & Cooling</p><p class="text-xs text-gray-400">24/7 service</p></div></a>
+                <a href="apps/brian-schmitt-heating-and-cooling-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Brian Schmitt Heating and Cooling</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars Yelp</p></div></a>
+                <a href="apps/g-r-freeman-heating-air-conditioning-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">G.R. Freeman Heating & Air Conditioning</p><p class="text-xs text-gray-400">4.4 stars • short notice</p></div></a>
+            </div>
+        </div>
 
-            <a href="apps/e-l-walters-air-conditioning-and-heating-inc-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-orange-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-full">HVAC</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">E. L. Walters Air Conditioning</h3>
-                    <p class="text-sm text-gray-500 mt-1">HVAC + restaurant equipment service</p>
-                </div>
-            </a>
+        <!-- Plumbing -->
+        <div id="plumbing" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center text-lg">🔧</div><h3 class="text-2xl font-bold text-gray-900">Plumbing (10)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/gary-s-plumbing-service-inc-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Gary's Plumbing Service Inc</p><p class="text-xs text-gray-400">44 yrs • (812) 471-3788</p></div></a>
+                <a href="apps/altstadt-hoffman-plumbing-services-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Altstadt Hoffman Plumbing Services</p><p class="text-xs text-gray-400">50+ yrs • drain/leak specialists</p></div></a>
+                <a href="apps/bill-s-plumbing-service-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Bill's Plumbing Service</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars Yelp</p></div></a>
+                <a href="apps/roto-rooter-evansville-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Roto-Rooter Evansville</p><p class="text-xs text-gray-400">91 yrs • 24/7 • 812-422-3184</p></div></a>
+                <a href="apps/hydromax-plumbing-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Hydromax Plumbing</p><p class="text-xs text-gray-400">45+ yrs • 24hr • (812) 925-3930</p></div></a>
+                <a href="apps/sims-electrical-plumbing-mechanical-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Sims Electrical Plumbing & Mechanical</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars</p></div></a>
+                <a href="apps/bud-s-plumbing-repair-service-bud-s-plumbing-service-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Bud's Plumbing & Repair Service</p><p class="text-xs text-gray-400">106 yrs • 24hr • (812) 423-5851</p></div></a>
+                <a href="apps/joe-bolin-plumbing-inc-the-underground-plumber-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Joe Bolin Plumbing Inc</p><p class="text-xs text-gray-400">54 yrs • A+ BBB • (930) 270-1542</p></div></a>
+                <a href="apps/evans-plumbing-repairs-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">Evans Plumbing & Repairs</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars • same-day</p></div></a>
+                <a href="apps/the-service-brothers-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3"><span class="text-blue-600 font-bold text-lg">→</span><div><p class="font-semibold text-gray-900">The Service Brothers</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars • handyman + plumbing</p></div></a>
+            </div>
+        </div>
 
-            <!-- Plumbing -->
-            <a href="apps/gary-s-plumbing-service-inc-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-cyan-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-cyan-50 text-cyan-700 text-xs font-semibold rounded-full">Plumbing</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Gary's Plumbing Service Inc</h3>
-                    <p class="text-sm text-gray-500 mt-1">44 years, residential/commercial</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📞</span><span class="ml-2">(812) 471-3788</span></div>
-                </div>
-            </a>
+        <!-- Lawn Care -->
+        <div id="lawn-care" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-lg">🌿</div><h3 class="text-2xl font-bold text-gray-900">Lawn Care (7)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/augusta-lawn-care-services-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">Augusta Lawn Care Services</p><p class="text-xs text-gray-400">Mowing, design, tree trimming</p></div></a>
+                <a href="apps/matts-turf-matt-s-lawn-care-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">Matts Turf / Matt's Lawn Care</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars</p></div></a>
+                <a href="apps/quiet-mow-lawn-care-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">Quiet Mow Lawn Care</p><p class="text-xs text-gray-400">Electric mowing, professional</p></div></a>
+                <a href="apps/nellis-lawn-landscape-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">Nellis Lawn & Landscape</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars</p></div></a>
+                <a href="apps/williams-lawncare-landscaping-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">Williams Lawncare & Landscaping</p><p class="text-xs text-gray-400">★★★★★ 5.0 stars Yelp</p></div></a>
+                <a href="apps/trugreen-lawn-care-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">TruGreen Lawn Care</p><p class="text-xs text-gray-400">National provider, local service</p></div></a>
+                <a href="apps/mckinney-total-property-care-booking.html" target="_blank" class="card-hover bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">→<div><p class="font-semibold text-gray-900">McKinney Total Property Care</p><p class="text-xs text-gray-400">Pressure washing + lawn, 4.5 stars</p></div></a>
+            </div>
+        </div>
 
-            <a href="apps/altstadt-hoffman-plumbing-services-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-cyan-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-cyan-50 text-cyan-700 text-xs font-semibold rounded-full">Plumbing</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Altstadt Hoffman Plumbing</h3>
-                    <p class="text-sm text-gray-500 mt-1">50+ years, drain & leak specialists</p>
-                </div>
-            </a>
+        <!-- Landscaping -->
+        <div id="landscaping" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center text-lg">🌳</div><h3 class="text-2xl font-bold text-gray-900">Landscaping (8)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/hoffherr-landscaping-booking.html" target="_blank">→ Hoffherr Landscaping</a>
+                <a href="apps/kraft-nursery-landscaping-booking.html" target="_blank">→ Kraft Nursery & Landscaping (100 yrs)</a>
+                <a href="apps/vanbeck-stockers-vanbeck-services-stocker-s-landscaping-booking.html" target="_blank">→ VanBeck Stockers (60+ yrs, 5.0★)</a>
+                <a href="apps/emerald-city-landscaping-outdoor-lighting-booking.html" target="_blank">→ Emerald City Landscaping (20+ yrs)</a>
+                <a href="apps/ben-bush-landscapes-booking.html" target="_blank">→ Ben Bush Landscapes</a>
+                <a href="apps/pmg-landscaping-booking.html" target="_blank">→ PMG Landscaping</a>
+                <a href="apps/vics-landscaping-and-more-booking.html" target="_blank">→ Vics Landscaping and More (5.0★)</a>
+                <a href="apps/bean-s-landscape-plus-booking.html" target="_blank">→ Bean's Landscape Plus (5.0★)</a>
+            </div>
+        </div>
 
-            <!-- Lawn Care -->
-            <a href="apps/augusta-lawn-care-services-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-green-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">Lawn Care</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Augusta Lawn Care Services</h3>
-                    <p class="text-sm text-gray-500 mt-1">Mowing, design, tree trimming</p>
-                </div>
-            </a>
+        <!-- Electrical -->
+        <div id="electrical" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center text-lg">⚡</div><h3 class="text-2xl font-bold text-gray-900">Electrical (6)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/completely-wired-booking.html" target="_blank">→ Completely Wired (5.0★, (812) 476-9473)</a>
+                <a href="apps/josh-lamb-electrician-llc-booking.html" target="_blank">→ Josh Lamb Electrician LLC (5.0★)</a>
+                <a href="apps/oxbow-electric-llc-booking.html" target="_blank">→ Oxbow Electric, LLC (5.0★, (812) 431-8988)</a>
+                <a href="apps/allied-electrical-contractors-booking.html" target="_blank">→ Allied Electrical Contractors</a>
+                <a href="apps/boyd-electric-llc-booking.html" target="_blank">→ Boyd Electric LLC (4.3★)</a>
+                <a href="apps/head-s-electric-booking.html" target="_blank">→ Head's Electric (5.0★)</a>
+            </div>
+        </div>
 
-            <a href="apps/matts-turf-matt-s-lawn-care-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-green-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">Lawn Care</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Matts Turf / Matt's Lawn Care</h3>
-                    <p class="text-sm text-gray-500 mt-1">★★★★★ 5.0 stars, treatments & reseeding</p>
-                </div>
-            </a>
+        <!-- Roofing -->
+        <div id="roofing" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center text-lg">🏠</div><h3 class="text-2xl font-bold text-gray-900">Roofing (9)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/heads-construction-booking.html" target="_blank">→ Heads Construction (812-474-1669)</a>
+                <a href="apps/the-way-construction-booking.html" target="_blank">→ The Way Construction (4.0★)</a>
+                <a href="apps/bill-morgan-roofing-and-construction-booking.html" target="_blank">→ Bill Morgan Roofing</a>
+                <a href="apps/mayes-roofing-booking.html" target="_blank">→ Mayes Roofing (5.0★)</a>
+                <a href="apps/sharp-solutions-home-improvement-booking.html" target="_blank">→ Sharp Solutions Home Improvement</a>
+                <a href="apps/bone-dry-roofing-booking.html" target="_blank">→ Bone Dry Roofing Evansville</a>
+                <a href="apps/chapman-construction-booking.html" target="_blank">→ Chapman Construction (5.0★)</a>
+                <a href="apps/ellis-roofing-booking.html" target="_blank">→ Ellis Roofing (5.0★)</a>
+                <a href="apps/home-sweet-home-improvement-maceo-booking.html" target="_blank">→ Home Sweet Home Improvement (5.0★)</a>
+            </div>
+        </div>
 
-            <!-- Landscaping -->
-            <a href="apps/hoffherr-landscaping-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-emerald-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Landscaping</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Hoffherr Landscaping</h3>
-                    <p class="text-sm text-gray-500 mt-1">Family-owned, design/build</p>
-                </div>
-            </a>
+        <!-- Painting -->
+        <div id="painting" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-lg">🎨</div><h3 class="text-2xl font-bold text-gray-900">Painting (7)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/devine-custom-painting-booking.html" target="_blank">→ Devine Custom Painting (5.0★)</a>
+                <a href="apps/turpen-s-painting-booking.html" target="_blank">→ Turpen's Painting</a>
+                <a href="apps/barta-s-painting-booking.html" target="_blank">→ Barta's Painting (5.0★)</a>
+                <a href="apps/1st-patriot-painting-llc-booking.html" target="_blank">→ 1st Patriot Painting LLC</a>
+                <a href="apps/handyman-812-booking.html" target="_blank">→ Handyman 812 (5.0★)</a>
+                <a href="apps/susan-s-painting-booking.html" target="_blank">→ Susan's Painting</a>
+                <a href="apps/finishing-touch-booking.html" target="_blank">→ Finishing Touch</a>
+            </div>
+        </div>
 
-            <a href="apps/kraft-nursery-landscaping-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-emerald-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-semibold rounded-full">Landscaping</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Kraft Nursery & Landscaping</h3>
-                    <p class="text-sm text-gray-500 mt-1">100 years family-owned</p>
-                </div>
-            </a>
-
-            <!-- Electrical -->
-            <a href="apps/completely-wired-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-yellow-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-xs font-semibold rounded-full">Electrical</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Completely Wired</h3>
-                    <p class="text-sm text-gray-500 mt-1">★★★★★ 5.0 stars, resi/commercial/industrial</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📞</span><span class="ml-2">(812) 476-9473</span></div>
-                </div>
-            </a>
-
-            <a href="apps/josh-lamb-electrician-llc-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-yellow-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-yellow-50 text-yellow-700 text-xs font-semibold rounded-full">Electrical</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Josh Lamb Electrician LLC</h3>
-                    <p class="text-sm text-gray-500 mt-1">★★★★★ 5.0 stars, same-day service</p>
-                </div>
-            </a>
-
-            <!-- Roofing -->
-            <a href="apps/heads-construction-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-red-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-red-50 text-red-700 text-xs font-semibold rounded-full">Roofing</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Heads Construction</h3>
-                    <p class="text-sm text-gray-500 mt-1">Roofing, gutters, siding, windows</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📞</span><span class="ml-2">812-474-1669</span></div>
-                </div>
-            </a>
-
-            <!-- Painting -->
-            <a href="apps/devine-custom-painting-booking.html" target="_blank" class="card-hover bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                <div class="h-2 bg-purple-500"></div>
-                <div class="p-5">
-                    <span class="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-semibold rounded-full">Painting</span>
-                    <h3 class="text-lg font-bold text-gray-900 mt-3">Devine Custom Painting</h3>
-                    <p class="text-sm text-gray-500 mt-1">★★★★★ 5.0 stars, int/ext + power washing</p>
-                    <div class="flex items-center mt-3 text-sm text-gray-400"><span>📍</span><span class="ml-2">915 W Franklin St</span></div>
-                </div>
-            </a>
+        <!-- Pest Control -->
+        <div id="pest-control" class="scroll-mt-8">
+            <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-lg">🐜</div><h3 class="text-2xl font-bold text-gray-900">Pest Control (7)</h3></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+                <a href="apps/mcmahon-exterminating-booking.html" target="_blank">→ McMahon Exterminating (4.1★)</a>
+                <a href="apps/swat-pest-management-booking.html" target="_blank">→ Swat Pest Management (3.8★)</a>
+                <a href="apps/fox-pest-control-evansville-booking.html" target="_blank">→ Fox Pest Control Evansville</a>
+                <a href="apps/action-pest-control-booking.html" target="_blank">→ Action Pest Control (4.7★)</a>
+                <a href="apps/t-g-pest-control-t-g-pest-control-newburgh-booking.html" target="_blank">→ T & G Pest Control (5.0★)</a>
+                <a href="apps/arrow-pest-control-booking.html" target="_blank">→ Arrow Pest Control (5.0★)</a>
+                <a href="apps/pass-pest-control-newburgh-booking.html" target="_blank">→ Pass Pest Control</a>
+            </div>
         </div>
     </section>
 
@@ -200,22 +240,22 @@
                 <div class="text-center">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto">1</div>
                     <h3 class="font-semibold mt-3">Pick Your Plan</h3>
-                    <p class="text-sm text-gray-500 mt-1">Booking site, Pro, or full bundle with AI phone agent</p>
+                    <p class="text-sm text-gray-500 mt-1">Booking site ($497), Pro ($997), or full bundle with AI phone agent ($1,497)</p>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto">2</div>
                     <h3 class="font-semibold mt-3">We Build It</h3>
-                    <p class="text-sm text-gray-500 mt-1">You get a draft within 24 hours to review and approve</p>
+                    <p class="text-sm text-gray-500 mt-1">Most sites are ready within 24 hours. Yours might already be done.</p>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto">3</div>
                     <h3 class="font-semibold mt-3">We Go Live</h3>
-                    <p class="text-sm text-gray-500 mt-1">Deployed on your custom subdomain or your domain</p>
+                    <p class="text-sm text-gray-500 mt-1">Deployed on your custom subdomain or your own domain name</p>
                 </div>
                 <div class="text-center">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto">4</div>
                     <h3 class="font-semibold mt-3">You Get Leads</h3>
-                    <p class="text-sm text-gray-500 mt-1">24/7 booking form captures customers while you work</p>
+                    <p class="text-sm text-gray-500 mt-1">24/7 booking form captures customers while you're out on jobs</p>
                 </div>
             </div>
         </div>
@@ -224,17 +264,13 @@
     <!-- CTA -->
     <section id="contact" class="gradient-bg text-white">
         <div class="max-w-4xl mx-auto px-6 py-16 text-center">
-            <h2 class="text-3xl font-bold">Ready to Get More Customers?</h2>
-            <p class="mt-3 text-blue-100 text-lg">Your website can be live this week. No monthly platform fees. No hidden costs.</p>
+            <h2 class="text-3xl font-bold">Is Your Business on This List?</h2>
+            <p class="mt-3 text-blue-100 text-lg">71 local businesses already have a site ready. If you see yours, claim it today. If not, we'll build yours in 24 hours.</p>
             <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="tel:812-555-0199" class="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition">
-                    📞 Call (812) 555-0199
-                </a>
-                <a href="mailto:bookings@app-factory.io" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-bold px-8 py-4 rounded-xl transition border border-white/20">
-                    ✉️ Email Me
-                </a>
+                <a href="tel:812-555-0199" class="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition">📞 Call (812) 555-0199</a>
+                <a href="mailto:bookings@app-factory.io" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-bold px-8 py-4 rounded-xl transition border border-white/20">✉️ Email Me</a>
             </div>
-            <p class="mt-4 text-sm text-blue-200">Or I'll call you — just tell me when.</p>
+            <p class="mt-4 text-sm text-blue-200">Or I'll call you — tell me when works.</p>
         </div>
     </section>
 
@@ -243,7 +279,7 @@
         <div class="max-w-6xl mx-auto px-6 py-8 text-center">
             <p class="font-semibold text-gray-300">Evansville Booking Sites</p>
             <p class="mt-1">Professional websites for local service businesses. Proudly built in Evansville, IN.</p>
-            <p class="mt-4 text-xs">© 2026 — All demo sites are for real local businesses. Contact us to claim yours.</p>
+            <p class="mt-4 text-xs">© 2026 — 71 demo sites for real local businesses. See yours? Email us to claim it.</p>
         </div>
     </footer>
 </body>
