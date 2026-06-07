@@ -1,0 +1,15 @@
+{
+  "name": "Barta's Painting - Booking",
+  "short_name": "Barta's Painting",
+  "start_url": "apps/barta-s-painting-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\ud83c\udfa8</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Pass Pest Control (Newburgh) - Booking",
+  "short_name": "Pass Pest Control (Newbur",
+  "start_url": "apps/pass-pest-control-newburgh-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d97706",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\ud83d\udc1c</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Evansville Heating and Air Conditioning - Booking",
+  "short_name": "Evansville Heating and Ai",
+  "start_url": "apps/evansville-heating-and-air-conditioning-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\u2744\ufe0f</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

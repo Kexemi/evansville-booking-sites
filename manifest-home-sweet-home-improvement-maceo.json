@@ -1,0 +1,15 @@
+{
+  "name": "Home Sweet Home Improvement (Maceo) - Booking",
+  "short_name": "Home Sweet Home Improveme",
+  "start_url": "apps/home-sweet-home-improvement-maceo-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b91c1c",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\ud83c\udfe0</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

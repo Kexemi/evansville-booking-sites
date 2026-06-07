@@ -1,0 +1,15 @@
+{
+  "name": "Williams Lawncare & Landscaping - Booking",
+  "short_name": "Williams Lawncare & Lands",
+  "start_url": "apps/williams-lawncare-landscaping-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\ud83c\udf3f</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

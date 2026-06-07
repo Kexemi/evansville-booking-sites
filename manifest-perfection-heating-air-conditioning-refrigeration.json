@@ -1,0 +1,15 @@
+{
+  "name": "Perfection Heating & Air Conditioning & Refrigeration - Booking",
+  "short_name": "Perfection Heating & Air ",
+  "start_url": "apps/perfection-heating-air-conditioning-refrigeration-booking.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\u2744\ufe0f</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
