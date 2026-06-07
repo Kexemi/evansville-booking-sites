@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allied Electrical Contractors — Review Request System</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2a5a8c;
+    --accent: #e8a838;
+    --accent-hover: #d4952e;
+    --bg: #f4f6f9;
+    --card-bg: #ffffff;
+    --text: #1e2a3a;
+    --text-light: #5a6a7a;
+    --success: #2e7d32;
+    --success-bg: #e8f5e9;
+    --warning: #f57c00;
+    --warning-bg: #fff3e0;
+    --danger: #c62828;
+    --danger-bg: #ffebee;
+    --border: #d0d8e0;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.3px; }
+  .header h1 small { font-size: 0.9rem; font-weight: 400; opacity: .8; display: block; }
+  .header-badge {
+    background: var(--accent);
+    color: var(--primary);
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+  /* ─── LAYOUT ─── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  @media (max-width: 860px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .card h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2 .icon { font-size: 1.3rem; }
+  /* ─── FORM ─── */
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    color: var(--text-light);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font);
+    transition: border-color .2s;
+    background: #fafbfc;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background: #fff;
+  }
+  .form-group textarea { resize: vertical; min-height: 60px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: var(--font);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--primary);
+  }
+  .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--primary-light); color: var(--primary-light); }
+  .btn-sm { padding: 6px 14px; font-size: 0.85rem; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: #b71c1c; }
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-success:hover { background: #1b5e20; }
+  /* ─── DASHBOARD STATS ─── */
+  .stat-card {
+    text-align: center;
+    padding: 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+  }
+  .stat-card .number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+  }
+  .stat-card .label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .stat-card .sub {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+  .stat-card.warning .number { color: var(--warning); }
+  .stat-card.success .number { color: var(--success); }
+  .stat-card.danger .number { color: var(--danger); }
+  /* ─── GENERATED OUTPUT ─── */
+  .output-box {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-left: 4px solid var(--primary-light);
+    position: relative;
+    margin-top: 8px;
+    min-height: 60px;
+  }
+  .output-box .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all .2s;
+  }
+  .output-box .copy-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+  /* ─── HISTORY TABLE ─── */
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .history-table th {
+    text-align: left;
+    padding: 10px 8px;
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-bottom: 2px solid var(--border);
+  }
+  .history-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .history-table tr:hover td { background: #f8faff; }
+  .status-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .status-sent { background: #e3f2fd; color: #1565c0; }
+  .status-reviewed { background: var(--success-bg); color: var(--success); }
+  .status-followup { background: var(--warning-bg); color: var(--warning); }
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+  }
+  .empty-state .big-icon { font-size: 3rem; margin-bottom: 12px; }
+  /* ─── TABS ─── */
+  .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: var(--font);
+  }
+  .tab:hover { color: var(--primary); }
+  .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  /* ─── STREAK ─── */
+  .streak-display {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .streak-fire {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+  .streak-info h3 { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+  .streak-info p { color: var(--text-light); font-size: 0.9rem; }
+  .streak-bar {
+    height: 10px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    flex: 1;
+    min-width: 100px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .streak-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #f57c00);
+    border-radius: 5px;
+    transition: width .5s ease;
+  }
+  /* ─── INSTRUCTION SHEET ─── */
+  #instruction-sheet {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px 48px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+  }
+  #instruction-sheet h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--primary); }
+  #instruction-sheet h2 { font-size: 1.2rem; margin: 24px 0 12px; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  #instruction-sheet h3 { font-size: 1.05rem; margin: 16px 0 8px; color: var(--primary-light); }
+  #instruction-sheet ul, #instruction-sheet ol { padding-left: 24px; margin: 8px 0; }
+  #instruction-sheet li { margin-bottom: 6px; }
+  #instruction-sheet .highlight-box {
+    background: #e8f5e9;
+    border-left: 4px solid var(--success);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+  #instruction-sheet .highlight-box.warn {
+    background: var(--warning-bg);
+    border-left-color: var(--warning);
+  }
+  #instruction-sheet .footer-note {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 2px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+  }
+  .print-btn-wrap { text-align: center; margin: 24px 0; }
+  @media print {
+    body { background: #fff; }
+    .header, .no-print, .print-btn-wrap { display: none !important; }
+    #instruction-sheet { box-shadow: none; padding: 0; border-radius: 0; }
+    .container { padding: 0; }
+  }
+  /* ─── TOAST ─── */
+  .toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .toast {
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    font-weight: 500;
+    font-size: 0.9rem;
+    animation: slideIn .3s ease;
+    max-width: 360px;
+  }
+  .toast.success { background: var(--success); }
+  .toast.warning { background: var(--warning); }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+  /* ─── MISC ─── */
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mb-16 { margin-bottom: 16px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .gap-8 { gap: 8px; }
+  .text-center { text-align: center; }
+  .tagline { font-size: 0.9rem; color: var(--text-light); margin-bottom: 16px; }
+  .google-review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 2px solid #4285f4;
+    color: #4285f4;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .2s;
+    font-size: 0.95rem;
+  }
+  .google-review-link:hover { background: #4285f4; color: #fff; }
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-bar input, .filter-bar select { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.85rem; font-family: var(--font); }
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal { background: #fff; border-radius: var(--radius); padding: 32px; max-width: 520px; width: 90%; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+  .modal h2 { margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <h1>⚡ Allied Electrical Contractors <small>Review Request System</small></h1>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <span class="header-badge">Target: 50 ★ Reviews at 4.5★</span>
+    <button class="btn btn-accent btn-sm no-print" onclick="switchTab('dashboard')">Dashboard</button>
+    <button class="btn btn-outline btn-sm no-print" style="border-color:rgba(255,255,255,.3);color:#fff" onclick="switchTab('instruction-sheet-tab')">📋 Instructions</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- TABS -->
+  <div class="tabs no-print" role="tablist">
+    <button class="tab active" data-tab="submit" onclick="switchTab('submit')">➕ New Request</button>
+    <button class="tab" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+    <button class="tab" data-tab="history" onclick="switchTab('history')">📋 History</button>
+    <button class="tab" data-tab="instruction-sheet-tab" onclick="switchTab('instruction-sheet-tab')">📄 Instructions</button>
+  </div>
+
+  <!-- ===== TAB: SUBMIT ===== -->
+  <div class="tab-content active" id="tab-submit">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2><span class="icon">📝</span> Customer &amp; Job Details</h2>
+          <p class="tagline">Enter details right after completing a job. Send within 2 hours for best results.</p>
+          <form id="reviewForm" onsubmit="return handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custName">Customer Name *</label>
+                <input type="text" id="custName" required placeholder="e.g. John Smith">
+              </div>
+              <div class="form-group">
+                <label for="custPhone">Phone</label>
+                <input type="tel" id="custPhone" placeholder="(812) 555-0123">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custEmail">Email</label>
+                <input type="email" id="custEmail" placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="jobDate">Job Date</label>
+                <input type="date" id="jobDate" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="servicePerformed">Service Performed *</label>
+              <textarea id="servicePerformed" required placeholder="e.g. Whole-house rewiring, panel upgrade, troubleshooting..." rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="jobValue">Job Value (approx.)</label>
+              <select id="jobValue">
+                <option value="">— Optional —</option>
+                <option value="Under $500">Under $500</option>
+                <option value="$500 – $1,500">$500 – $1,500</option>
+                <option value="$1,500 – $5,000">$1,500 – $5,000</option>
+                <option value="$5,000+">$5,000+</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px">
+              ✨ Generate Review Request
+            </button>
+          </form>
+        </div>
+
+        <!-- Quick Google Review Link -->
+        <div class="card">
+          <h2><span class="icon">⭐</span> Google Review Link</h2>
+          <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:12px">
+            Send this link to customers so they can leave a review directly.
+          </p>
+          <a href="https://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville"
+             target="_blank" class="google-review-link">
+            ★ Write a Google Review
+          </a>
+          <div class="mt-8">
+            <button class="btn btn-sm btn-outline" onclick="copyText('https://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville')">📋 Copy Link</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- SMS Output -->
+        <div class="card" id="smsCard" style="display:none">
+          <h2><span class="icon">💬</span> SMS Message <span style="font-size:0.75rem;color:var(--text-light);font-weight:400">(3× higher open rate than email)</span></h2>
+          <div class="output-box" id="smsOutput">Your generated SMS will appear here.</div>
+          <div class="mt-8 flex-between">
+            <button class="btn btn-sm btn-outline" onclick="copyOutput('smsOutput')">📋 Copy SMS</button>
+            <span id="smsChars" style="font-size:0.8rem;color:var(--text-light)"></span>
+          </div>
+        </div>
+
+        <!-- Email Output -->
+        <div class="card" id="emailCard" style="display:none">
+          <h2><span class="icon">📧</span> Email Template</h2>
+          <div class="output-box" id="emailOutput">Your generated email will appear here.</div>
+          <div class="mt-8">
+            <button class="btn btn-sm btn-outline" onclick="copyOutput('emailOutput')">📋 Copy Email</button>
+          </div>
+        </div>
+
+        <!-- Action buttons after generation -->
+        <div class="card" id="actionCard" style="display:none">
+          <h2><span class="icon">📤</span> Next Steps</h2>
+          <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:12px">
+            1. Copy the SMS or email template above<br>
+            2. Send to the customer (SMS is preferred)<br>
+            3. Ask them to click the Google Review link<br>
+            4. Mark as sent below
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-success" onclick="markSent()">✅ Mark as Sent</button>
+            <button class="btn btn-outline" onclick="resetForm()">🔄 Start Over</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: DASHBOARD ===== -->
+  <div class="tab-content" id="tab-dashboard">
+    <div class="grid-3 mb-16">
+      <div class="stat-card">
+        <div class="number" id="statTotalSent">0</div>
+        <div class="label">Total Requests Sent</div>
+        <div class="sub">All time</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="statReviewed">0</div>
+        <div class="label">Reviews Received</div>
+        <div class="sub">Confirmed on Google</div>
+      </div>
+      <div class="stat-card" id="statNeedCard">
+        <div class="number" id="statNeedReviews">50</div>
+        <div class="label">Reviews Needed for 4.5★</div>
+        <div class="sub">Target: 50 total ★ reviews</div>
+      </div>
+    </div>
+    <div class="grid-3 mb-16">
+      <div class="stat-card">
+        <div class="number" id="statConversionRate">0%</div>
+        <div class="label">Conversion Rate</div>
+        <div class="sub">Requests → Reviews</div>
+      </div>
+      <div class="stat-card" id="statStreakCard">
+        <div class="number" id="statStreak">0</div>
+        <div class="label">Day Streak 🔥</div>
+        <div class="sub">Consecutive days with a request sent</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="statMonthSent">0</div>
+        <div class="label">This Month</div>
+        <div class="sub">Requests sent in current month</div>
+      </div>
+    </div>
+
+    <!-- Streak detail -->
+    <div class="card">
+      <h2><span class="icon">🔥</span> Request Streak</h2>
+      <div class="streak-display">
+        <div class="streak-fire" id="streakEmoji">🔥</div>
+        <div class="streak-info">
+          <h3 id="streakCount">0 days</h3>
+          <p>Consecutive days with at least one review request sent</p>
+        </div>
+        <div class="streak-bar">
+          <div class="streak-bar-fill" id="streakBarFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress toward target -->
+    <div class="card">
+      <h2><span class="icon">🎯</span> Progress Toward 50 ★ Reviews</h2>
+      <div style="height:24px;background:#e0e0e0;border-radius:12px;overflow:hidden;">
+        <div id="progressBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--primary-light));border-radius:12px;transition:width .5s ease;"></div>
+      </div>
+      <div class="flex-between mt-8" style="font-size:0.85rem;color:var(--text-light)">
+        <span id="progressLabel">0 / 50 reviews</span>
+        <span id="progressPct">0%</span>
+      </div>
+    </div>
+
+    <!-- Need more detail -->
+    <div class="card">
+      <h2><span class="icon">📈</span> Estimated Reviews Needed</h2>
+      <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:8px">
+        Based on a 4.5★ target with estimated conversion rates:
+      </p>
+      <div id="needDetail" class="grid-3">
+        <div class="stat-card"><div class="number" id="estRequestsNeeded">0</div><div class="label">Requests Needed</div><div class="sub">at current conversion rate</div></div>
+        <div class="stat-card"><div class="number" id="estAt25Pct">0</div><div class="label">Requests (25% conv.)</div><div class="sub">conservative estimate</div></div>
+        <div class="stat-card"><div class="number" id="estAt50Pct">0</div><div class="label">Requests (50% conv.)</div><div class="sub">optimistic estimate</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: HISTORY ===== -->
+  <div class="tab-content" id="tab-history">
+    <div class="card">
+      <div class="flex-between mb-16">
+        <h2><span class="icon">📋</span> Review Request History</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-sm btn-outline" onclick="exportCSV()">📤 Export CSV</button>
+          <button class="btn btn-sm btn-danger" onclick="if(confirm('Delete ALL history? This cannot be undone.')){clearAllHistory()}">🗑️ Clear All</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="historySearch" placeholder="Search customer..." oninput="renderHistory()">
+        <select id="historyFilter" onchange="renderHistory()">
+          <option value="all">All Status</option>
+          <option value="sent">Sent</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="followup">Follow-up</option>
+        </select>
+      </div>
+      <div id="historyContainer">
+        <div class="empty-state">
+          <div class="big-icon">📭</div>
+          <p>No review requests yet. Submit your first one above!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: INSTRUCTION SHEET ===== -->
+  <div class="tab-content" id="tab-instruction-sheet-tab">
+    <div class="print-btn-wrap no-print">
+      <button class="btn btn-accent" onclick="window.print()">🖨️ Print Instructions</button>
+    </div>
+    <div id="instruction-sheet">
+      <h1>📋 Allied Electrical Contractors — Review Request Playbook</h1>
+      <p style="font-size:1rem;color:var(--text-light);margin-bottom:8px">
+        <em>How and when to ask customers for Google Reviews — and build a 5-star reputation.</em>
+      </p>
+
+      <h2> Why Reviews Matter</h2>
+      <p>Allied Electrical currently has <strong>0 reviews on Yelp</strong> and needs a strong Google presence. A steady flow of Google reviews builds trust, improves local search ranking, and directly wins more jobs. Our target is <strong>50+ Google reviews at a 4.5★ average</strong>.</p>
+
+      <div class="highlight-box">
+        <strong>⚡ Key Stat:</strong> SMS review requests have a <strong>~3× higher open rate</strong> than email. Prefer texting when you have the customer's mobile number.
+      </div>
+
+      <h2> The Workflow</h2>
+      <ol>
+        <li><strong>Complete the job</strong> — do excellent work, clean up, and thank the customer.</li>
+        <li><strong>Open this system</strong> (bookmark it on your phone) and enter the customer's details.</li>
+        <li><strong>Copy the SMS</strong> (preferred) or email template generated for you.</li>
+        <li><strong>Send within 2 hours</strong> of finishing the job — conversion drops sharply after that.</li>
+        <li><strong>Click "Mark as Sent"</strong> to log it in the tracker.</li>
+        <li><strong>Follow up</strong> if no review appears within 3–5 days (use the follow-up template).</li>
+        <li><strong>Confirm the review</strong> appears on Google and update the status in the system.</li>
+      </ol>
+
+      <h2> When to Ask — The Golden Moment</h2>
+      <p>The best time to ask for a review is <strong>immediately after positive feedback</strong> — right when the customer says "thank you" or compliments your work. Strike while the feeling of satisfaction is fresh.</p>
+
+      <ul>
+        <li><strong>Right after payment</strong> — "By the way, I'm glad everything looks great. Would you mind leaving a quick Google review? It helps us a ton."</li>
+        <li><strong>During the final walk-through</strong> — when you show them the finished work and they're impressed.</li>
+        <li><strong>Within 2 hours of leaving</strong> — send the SMS generated by this system.</li>
+        <li><strong>Next-day follow-up</strong> — a friendly text or email if you haven't seen a review appear.</li>
+      </ul>
+
+      <h2> Scripts &amp; Templates</h2>
+
+      <h3>SMS Script (Copy &amp; Send)</h3>
+      <div class="highlight-box" style="font-family:monospace;font-size:0.9rem;background:#f5f5f5;border-left-color:var(--primary-light);">
+Hi [Customer Name], this is [Your Name] from Allied Electrical Contractors. Thanks again for trusting us with your [Service Performed]. We'd love a quick Google review if you're happy with the work! It only takes 30 seconds:<br><br>
+https://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville<br><br>
+Thanks so much! — Allied Electrical
+      </div>
+
+      <h3>Email Script</h3>
+      <div class="highlight-box" style="font-family:monospace;font-size:0.9rem;background:#f5f5f5;border-left-color:var(--primary-light);">
+Subject: Thanks for choosing Allied Electrical!<br><br>
+Hi [Customer Name],<br><br>
+Thanks again for letting us handle your [Service Performed]. It was a pleasure working with you!<br><br>
+If you're happy with the work, would you mind leaving a quick Google review? Your feedback helps other homeowners find trusted electricians. It takes just 30 seconds:<br><br>
+https://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville<br><br>
+Thank you!<br>
+[Your Name]<br>
+Allied Electrical Contractors<br>
+Evansville, IN
+      </div>
+
+      <h3>Follow-up SMS (3–5 Days Later)</h3>
+      <div class="highlight-box" style="font-family:monospace;font-size:0.9rem;background:var(--warning-bg);border-left-color:var(--warning);">
+Hi [Customer Name], just a quick follow-up — if you have a moment, we'd really appreciate a Google review of the [Service Performed] we completed recently. It really helps small businesses like ours!<br><br>
+https://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville<br><br>
+Thanks! — Allied Electrical
+      </div>
+
+      <h2> Never Do This</h2>
+      <ul>
+        <li><strong>❌ Don't offer discounts or payments</strong> for reviews — that violates Google's policies and can get reviews removed.</li>
+        <li><strong>❌ Don't ask unhappy customers</strong> for a review. Fix the issue first, then ask.</li>
+        <li><strong>❌ Don't write fake reviews</strong> — Google catches these and it damages your reputation.</li>
+        <li><strong>❌ Don't ask more than twice</strong> — one request + one follow-up is plenty.</li>
+        <li><strong>❌ Don't wait longer than 48 hours</strong> — the warm feeling fades fast.</li>
+      </ul>
+
+      <h2> Tracking &amp; Accountability</h2>
+      <ul>
+        <li>Use the <strong>Dashboard</strong> tab to see total requests, conversion rate, and streak.</li>
+        <li>Use the <strong>History</strong> tab to see every request logged with dates.</li>
+        <li>Update a request's status to "Reviewed ✓" once you confirm the review is live on Google.</li>
+        <li>Aim for at least <strong>1 request per working day</strong> to build momentum.</li>
+      </ul>
+
+      <h2> Estimated Milestones</h2>
+      <ul>
+        <li><strong>10 reviews</strong> — Your Google star rating appears prominently in search results.</li>
+        <li><strong>25 reviews</strong> — Strong social proof; most competitors at this level.</li>
+        <li><strong>50 reviews</strong> — 🎯 <strong>TARGET</strong> — top-tier presence for Evansville electrical contractors.</li>
+      </ul>
+
+      <div class="highlight-box warn">
+        <strong>⚡ Pro Tip:</strong> Set a reminder on your phone to check this system each afternoon. Even one request per day = 365 per year. At a 25% conversion rate, that's ~91 reviews — well past the 50 target.
+      </div>
+
+      <div class="footer-note">
+        Allied Electrical Contractors — Review Request System<br>
+        Built for the business owner. Updated regularly. Data stored locally in your browser.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ===== DATA LAYER (localStorage) =====
+const STORAGE_KEY = 'allied_review_system_data';
+
+function getDefaultData() {
+  return { requests: [] };
+}
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      if (data && Array.isArray(data.requests)) return data;
+    }
+  } catch(e) { /* ignore */ }
+  return getDefaultData();
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function getRequests() {
+  return loadData().requests;
+}
+
+function saveRequests(requests) {
+  const data = loadData();
+  data.requests = requests;
+  saveData(data);
+}
+
+// ===== TOAST NOTIFICATIONS =====
+function toast(msg, type = '') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; setTimeout(() => el.remove(), 300); }, 3000);
+}
+
+// ===== COPY UTILITY =====
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => toast('Copied to clipboard!', 'success')).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); toast('Copied to clipboard!', 'success'); } catch(e) { toast('Could not copy. Please select and copy manually.', 'warning'); }
+  document.body.removeChild(ta);
+}
+
+function copyOutput(id) {
+  const el = document.getElementById(id);
+  const text = el.textContent.trim();
+  if (!text || text === 'Your generated SMS will appear here.' || text === 'Your generated email will appear here.') {
+    toast('Nothing to copy yet.', 'warning');
+    return;
+  }
+  copyText(text);
+}
+
+// ===== FORM SUBMISSION =====
+function handleSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const jobDate = document.getElementById('jobDate').value;
+  const service = document.getElementById('servicePerformed').value.trim();
+  const jobValue = document.getElementById('jobValue').value;
+
+  if (!name || !service || !jobDate) {
+    toast('Please fill in all required fields (Name, Service, Date).', 'warning');
+    return false;
+  }
+
+  // Generate personalized messages
+  const sms = generateSMS(name, service);
+  const emailText = generateEmail(name, service);
+
+  // Display
+  document.getElementById('smsOutput').textContent = sms;
+  document.getElementById('emailOutput').textContent = emailText;
+  document.getElementById('smsChars').textContent = sms.length + ' / 160 chars (' + Math.ceil(sms.length / 160) + ' SMS)';
+  document.getElementById('smsCard').style.display = 'block';
+  document.getElementById('emailCard').style.display = 'block';
+  document.getElementById('actionCard').style.display = 'block';
+
+  // Store current data for when they click "Mark as Sent"
+  window._pendingRequest = { name, phone, email, jobDate, service, jobValue, sms, emailText };
+
+  toast('✅ Templates generated! Send to the customer and click "Mark as Sent".', 'success');
+  return false;
+}
+
+function generateSMS(name, service) {
+  return `Hi ${name}, this is [Your Name] from Allied Electrical Contractors. Thanks again for trusting us with the ${service}! We'd love a quick Google review if you're happy with the work — it only takes 30 seconds:\n\nhttps://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville\n\nThanks so much! — Allied Electrical`;
+}
+
+function generateEmail(name, service) {
+  return `Subject: Thanks for choosing Allied Electrical!\n\nHi ${name},\n\nThanks again for letting us handle the ${service}. It was a pleasure working with you!\n\nIf you're happy with the work, would you mind leaving a quick Google review? Your feedback helps other homeowners find trusted electricians. It takes just 30 seconds:\n\nhttps://search.google.com/local/writereview?q=Allied+Electrical+Contractors+Evansville\n\nThank you!\n[Your Name]\nAllied Electrical Contractors\nEvansville, IN`;
+}
+
+// ===== MARK AS SENT =====
+function markSent() {
+  const p = window._pendingRequest;
+  if (!p) {
+    toast('No pending request. Fill out the form first.', 'warning');
+    return;
+  }
+
+  const requests = getRequests();
+  const now = new Date();
+  const entry = {
+    id: Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+    name: p.name,
+    phone: p.phone,
+    email: p.email,
+    jobDate: p.jobDate,
+    service: p.service,
+    jobValue: p.jobValue,
+    sms: p.sms,
+    emailText: p.emailText,
+    sentDate: now.toISOString(),
+    sentDateFormatted: formatDate(now),
+    status: 'sent' // sent | reviewed | followup
+  };
+  requests.push(entry);
+  saveRequests(requests);
+
+  toast(`✅ Request logged for ${p.name}!`, 'success');
+
+  // Reset
+  window._pendingRequest = null;
+  resetForm();
+
+  // Refresh dashboard if visible
+  updateDashboard();
+}
+
+// ===== RESET =====
+function resetForm() {
+  document.getElementById('reviewForm').reset();
+  // Set default date
+  document.getElementById('jobDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('smsCard').style.display = 'none';
+  document.getElementById('emailCard').style.display = 'none';
+  document.getElementById('actionCard').style.display = 'none';
+  window._pendingRequest = null;
+}
+
+// ===== DATE HELPERS =====
+function formatDate(d) {
+  const date = (typeof d === 'string') ? new Date(d) : d;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function formatDateShort(d) {
+  const date = (typeof d === 'string') ? new Date(d) : d;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// ===== HISTORY RENDERING =====
+function renderHistory() {
+  const container = document.getElementById('historyContainer');
+  let requests = getRequests();
+  const search = document.getElementById('historySearch').value.toLowerCase().trim();
+  const filter = document.getElementById('historyFilter').value;
+
+  if (search) {
+    requests = requests.filter(r => r.name.toLowerCase().includes(search) || (r.phone && r.phone.includes(search)));
+  }
+  if (filter !== 'all') {
+    requests = requests.filter(r => r.status === filter);
+  }
+
+  if (requests.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="big-icon">📭</div><p>No review requests match your criteria.</p></div>`;
+    return;
+  }
+
+  // Sort newest first
+  requests.sort((a, b) => new Date(b.sentDate) - new Date(a.sentDate));
+
+  let html = `<table class="history-table">
+    <thead><tr>
+      <th>Customer</th>
+      <th>Service</th>
+      <th>Date Sent</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr></thead><tbody>`;
+
+  requests.forEach(r => {
+    const statusClass = r.status === 'sent' ? 'status-sent' : r.status === 'reviewed' ? 'status-reviewed' : 'status-followup';
+    const statusLabel = r.status === 'sent' ? '📤 Sent' : r.status === 'reviewed' ? '⭐ Reviewed' : '🔁 Follow-up';
+    html += `<tr>
+      <td><strong>${escHtml(r.name)}</strong>${r.phone ? '<br><span style="font-size:0.8rem;color:var(--text-light)">' + escHtml(r.phone) + '</span>' : ''}</td>
+      <td>${escHtml(r.service)}</td>
+      <td>${r.sentDateFormatted || formatDate(r.sentDate)}</td>
+      <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+      <td>
+        <button class="btn btn-sm btn-outline" onclick="showDetail('${r.id}')">👁️</button>
+        <button class="btn btn-sm ${r.status === 'reviewed' ? 'btn-success' : 'btn-outline'}" onclick="toggleStatus('${r.id}')">
+          ${r.status === 'reviewed' ? '★' : '⬜'}
+        </button>
+        <button class="btn btn-sm btn-danger" onclick="deleteEntry('${r.id}')">✕</button>
+      </td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  container.innerHTML = html;
+}
+
+function escHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+// ===== ENTRY ACTIONS =====
+function showDetail(id) {
+  const requests = getRequests();
+  const r = requests.find(x => x.id === id);
+  if (!r) return;
+
+  const modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  modal.innerHTML = `<div class="modal">
+    <h2>📄 ${escHtml(r.name)}</h2>
+    <table style="width:100%;font-size:0.9rem;border-collapse:collapse">
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Phone:</td><td style="padding:6px 8px">${escHtml(r.phone || '—')}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Email:</td><td style="padding:6px 8px">${escHtml(r.email || '—')}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Service:</td><td style="padding:6px 8px">${escHtml(r.service)}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Job Date:</td><td style="padding:6px 8px">${r.jobDate}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Value:</td><td style="padding:6px 8px">${escHtml(r.jobValue || '—')}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Sent:</td><td style="padding:6px 8px">${r.sentDateFormatted || formatDate(r.sentDate)}</td></tr>
+      <tr><td style="padding:6px 8px;font-weight:600;color:var(--text-light)">Status:</td><td style="padding:6px 8px">${r.status}</td></tr>
+    </table>
+    <hr style="margin:12px 0;border:none;border-top:1px solid var(--border)">
+    <p style="font-weight:600;font-size:0.9rem">SMS Template:</p>
+    <div style="background:#f0f4f8;padding:10px;border-radius:6px;font-size:0.85rem;white-space:pre-wrap;margin:4px 0 12px">${escHtml(r.sms)}</div>
+    <p style="font-weight:600;font-size:0.9rem">Email Template:</p>
+    <div style="background:#f0f4f8;padding:10px;border-radius:6px;font-size:0.85rem;white-space:pre-wrap;margin:4px 0 12px">${escHtml(r.emailText)}</div>
+    <button class="btn btn-sm btn-outline" onclick="this.closest('.modal-overlay').remove()">Close</button>
+  </div>`;
+  document.body.appendChild(modal);
+}
+
+function toggleStatus(id) {
+  const requests = getRequests();
+  const r = requests.find(x => x.id === id);
+  if (!r) return;
+  if (r.status === 'reviewed') {
+    r.status = 'sent';
+    toast('Marked as sent (not reviewed).', 'warning');
+  } else {
+    r.status = 'reviewed';
+    toast('⭐ Marked as reviewed!', 'success');
+  }
+  saveRequests(requests);
+  renderHistory();
+  updateDashboard();
+}
+
+function deleteEntry(id) {
+  if (!confirm('Delete this entry?')) return;
+  let requests = getRequests();
+  requests = requests.filter(x => x.id !== id);
+  saveRequests(requests);
+  renderHistory();
+  updateDashboard();
+  toast('Entry deleted.', 'success');
+}
+
+function clearAllHistory() {
+  saveRequests([]);
+  renderHistory();
+  updateDashboard();
+  toast('All history cleared.', 'success');
+}
+
+// ===== EXPORT CSV =====
+function exportCSV() {
+  const requests = getRequests();
+  if (requests.length === 0) {
+    toast('No data to export.', 'warning');
+    return;
+  }
+  let csv = 'ID,Name,Phone,Email,Job Date,Service,Job Value,Sent Date,Status\n';
+  requests.forEach(r => {
+    csv += `"${r.id}","${r.name}","${r.phone || ''}","${r.email || ''}","${r.jobDate}","${r.service}","${r.jobValue || ''}","${r.sentDate}","${r.status}"\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'allied_review_requests.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('CSV exported!', 'success');
+}
+
+// ===== DASHBOARD =====
+function updateDashboard() {
+  const requests = getRequests();
+  const totalSent = requests.length;
+  const reviewed = requests.filter(r => r.status === 'reviewed').length;
+  const monthSent = requests.filter(r => {
+    const d = new Date(r.sentDate);
+    const now = new Date();
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  }).length;
+
+  const target = 50;
+  const needForTarget = Math.max(0, target - reviewed);
+  const conversionRate = totalSent > 0 ? Math.round((reviewed / totalSent) * 100) : 0;
+
+  document.getElementById('statTotalSent').textContent = totalSent;
+  document.getElementById('statReviewed').textContent = reviewed;
+  document.getElementById('statNeedReviews').textContent = needForTarget;
+  document.getElementById('statConversionRate').textContent = conversionRate + '%';
+  document.getElementById('statMonthSent').textContent = monthSent;
+
+  // Streak calculation
+  const streak = calculateStreak(requests);
+  document.getElementById('statStreak').textContent = streak;
+  document.getElementById('streakCount').textContent = streak + ' days';
+  document.getElementById('streakEmoji').textContent = streak >= 7 ? '🔥🔥' : streak >= 3 ? '🔥' : '💪';
+  const streakMax = 30;
+  const streakPct = Math.min(100, (streak / streakMax) * 100);
+  document.getElementById('streakBarFill').style.width = streakPct + '%';
+
+  // Progress bar
+  const pct = Math.min(100, Math.round((reviewed / target) * 100));
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = reviewed + ' / ' + target + ' reviews';
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  // Estimates
+  const needAtCurrent = conversionRate > 0 ? Math.ceil((target - reviewed) / (conversionRate / 100)) : target * 4;
+  const needAt25 = Math.ceil((target - reviewed) / 0.25);
+  const needAt50 = Math.ceil((target - reviewed) / 0.50);
+  document.getElementById('estRequestsNeeded').textContent = isFinite(needAtCurrent) ? needAtCurrent : '—';
+  document.getElementById('estAt25Pct').textContent = isFinite(needAt25) ? needAt25 : '—';
+  document.getElementById('estAt50Pct').textContent = isFinite(needAt50) ? needAt50 : '—';
+
+  // Card color for need
+  const needCard = document.getElementById('statNeedCard');
+  needCard.className = 'stat-card';
+  if (needForTarget === 0) needCard.classList.add('success');
+  else if (needForTarget <= 25) needCard.classList.add('warning');
+  else needCard.classList.add('danger');
+}
+
+function calculateStreak(requests) {
+  if (requests.length === 0) return 0;
+
+  // Get unique dates (by day) when requests were sent
+  const dateSet = new Set();
+  requests.forEach(r => {
+    const d = new Date(r.sentDate);
+    const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    dateSet.add(key);
+  });
+
+  const dates = Array.from(dateSet).sort().reverse(); // newest first
+  if (dates.length === 0) return 0;
+
+  let streak = 1;
+  const today = new Date();
+  const todayKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+  // If the most recent date is not today or yesterday, streak = 0
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayKey = yesterday.getFullYear() + '-' + String(yesterday.getMonth()+1).padStart(2,'0') + '-' + String(yesterday.getDate()).padStart(2,'0');
+
+  if (dates[0] !== todayKey && dates[0] !== yesterdayKey) {
+    // Check if there's any activity at all — if newest is older than yesterday, streak is 0
+    return 0;
+  }
+
+  // Count consecutive days backward
+  for (let i = 1; i < dates.length; i++) {
+    const prevDate = new Date(dates[i-1]);
+    const currDate = new Date(dates[i]);
+    const diffMs = prevDate.getTime() - currDate.getTime();
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    if (diffDays === 1) {
+      streak++;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(tabId) {
+  // Map to actual tab ids
+  const tabMap = {
+    'submit': 'tab-submit',
+    'dashboard': 'tab-dashboard',
+    'history': 'tab-history',
+    'instruction-sheet-tab': 'tab-instruction-sheet-tab'
+  };
+  const contentId = tabMap[tabId] || 'tab-submit';
+
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById(contentId).classList.add('active');
+
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.tab[data-tab="${tabId}"]`)?.classList.add('active');
+
+  // Refresh dashboard/history when switched to
+  if (tabId === 'dashboard') updateDashboard();
+  if (tabId === 'history') renderHistory();
+}
+
+// ===== INIT =====
+(function init() {
+  // Set default date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('jobDate').value = today;
+
+  // Load and show dashboard
+  updateDashboard();
+
+  // Check for existing data
+  const requests = getRequests();
+  if (requests.length > 0) {
+    // Show a subtle notification on load
+    console.log(`Allied Review System: ${requests.length} requests loaded.`);
+  }
+})();
+</script>
+</body>
+</html>
