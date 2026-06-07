@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evansville Heating and Air Conditioning | Book Now</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .star { color: #f59e0b; }
+        .review-card { transition: background-color 0.2s; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <div class="max-w-4xl mx-auto">
+        <header class="bg-white shadow-sm border-b">
+            <div class="px-6 py-4 flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Evansville Heating and Air Conditioning</h1>
+                    <p class="text-sm text-gray-600 mt-1">Professional HVAC Services • Evansville, IN Area</p>
+                </div>
+                <div class="text-right text-sm">
+                    <a href="tel:812-618-2659" class="block text-blue-600 hover:text-blue-800 font-semibold">812-618-2659</a>
+                    <a href="https://evansvilleheatingandair.com" target="_blank" class="text-blue-500 hover:underline text-xs">evansvilleheatingandair.com</a>
+                </div>
+            </div>
+        </header>
+        <div class="p-6 space-y-8">
+            <div class="bg-white rounded-2xl p-6 shadow border">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+                    <div><span class="font-semibold text-gray-500">Address</span><br><span class="text-gray-700">N/A</span></div>
+                    <div><span class="font-semibold text-gray-500">Phone</span><br><a href="tel:812-618-2659" class="text-blue-600 hover:underline">812-618-2659</a></div>
+                    <div><span class="font-semibold text-gray-500">Website</span><br><a href="https://evansvilleheatingandair.com" target="_blank" class="text-blue-500 hover:underline text-xs">evansvilleheatingandair.com</a></div>
+                </div>
+                <p class="mt-4 text-xs text-gray-500 border-t pt-3"><span class="font-semibold text-gray-600">About:</span> Residential/commercial</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow border p-6">
+                <h2 class="text-2xl font-semibold mb-4">Schedule Service</h2>
+                <form id="booking-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Customer Name *</label>
+                            <input type="text" id="customer-name" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Jane Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
+                            <select id="service" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500 bg-white">
+                                <option>AC Repair</option>
+                                <option>AC Installation / Replacement</option>
+                                <option>Furnace Maintenance & Tune-Up</option>
+                                <option>Heating System Repair</option>
+                                <option>Emergency / 24hr Service</option>
+                                <option>Other (describe in notes)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Date *</label>
+                            <input type="date" id="date" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Time *</label>
+                            <input type="time" id="time" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                        <textarea id="notes" rows="3" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Describe issue or request..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-xl transition shadow-sm">Submit Booking Request</button>
+                </form>
+                <div id="success-msg" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl"></div>
+            </div>
+            <div class="bg-white rounded-2xl shadow border p-6">
+                <h2 class="text-2xl font-semibold mb-4">Customer Reviews</h2>
+                <div id="reviews-list" class="space-y-4 mb-6">
+                    <div class="review-card border border-gray-200 rounded-xl p-4">
+                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★★</span></div>
+                        <p class="text-sm text-gray-700">"Excellent service, professional and on time. Highly recommend for hvac work in the area."</p>
+                        <p class="text-xs text-gray-400 mt-1">— Local Customer, Evansville</p>
+                    </div>
+                    <div class="review-card border border-gray-200 rounded-xl p-4">
+                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★☆</span></div>
+                        <p class="text-sm text-gray-700">"Fair pricing and great follow-up. The team was clean and explained everything clearly."</p>
+                        <p class="text-xs text-gray-400 mt-1">— Neighbor, Newburgh</p>
+                    </div>
+                    <div class="review-card border border-gray-200 rounded-xl p-4">
+                        <div class="flex items-center mb-1"><span class="star text-lg">★★★★★</span></div>
+                        <p class="text-sm text-gray-700">"Best hvac provider we've used locally. Reliable and trustworthy."</p>
+                        <p class="text-xs text-gray-400 mt-1">— Homeowner, Evansville</p>
+                    </div>
+                </div>
+                <div class="border-t pt-4">
+                    <h3 class="font-semibold text-lg mb-3">Leave Your Review</h3>
+                    <div id="review-form" class="space-y-3">
+                        <div class="flex items-center gap-2 text-xl" id="star-rating">
+                            <span class="star cursor-pointer" data-r="5">★</span>
+                            <span class="star cursor-pointer text-gray-300" data-r="4">★</span>
+                            <span class="star cursor-pointer text-gray-300" data-r="3">★</span>
+                            <span class="star cursor-pointer text-gray-300" data-r="2">★</span>
+                            <span class="star cursor-pointer text-gray-300" data-r="1">★</span>
+                            <span class="text-sm text-gray-500 ml-2" id="rating-label">Excellent (5)</span>
+                        </div>
+                        <textarea id="review-text" rows="2" class="w-full border border-gray-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500" placeholder="Share your experience..."></textarea>
+                        <button onclick="addReview()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition text-sm">Post Review</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentRating = 5;
+        document.querySelectorAll('#star-rating .star').forEach(el => {
+            el.addEventListener('click', function() {
+                currentRating = parseInt(this.dataset.r);
+                document.querySelectorAll('#star-rating .star').forEach((s, i) => {
+                    s.classList.toggle('text-gray-300', i >= currentRating);
+                    s.classList.toggle('star', i < currentRating);
+                });
+                const labels = ['', 'Poor (1)', 'Below Average (2)', 'Average (3)', 'Very Good (4)', 'Excellent (5)'];
+                document.getElementById('rating-label').textContent = labels[currentRating];
+            });
+        });
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('success-msg').classList.remove('hidden');
+            document.getElementById('success-msg').innerHTML = '<p class="font-semibold">✅ Booking request submitted!</p><p class="text-sm mt-1">We\'ll confirm your appointment within 24 hours. Thank you for choosing Evansville Heating and Air Conditioning.</p>';
+        });
+        function addReview() {
+            const text = document.getElementById('review-text').value.trim();
+            if (!text) return alert('Please write a review.');
+            const stars = '★'.repeat(currentRating) + '☆'.repeat(5-currentRating);
+            const html = '<div class="review-card border border-gray-200 rounded-xl p-4"><div class="flex items-center mb-1"><span class="star text-lg">' + stars + '</span></div><p class="text-sm text-gray-700">"' + text + '"</p><p class="text-xs text-gray-400 mt-1">— You, just now</p></div>';
+            document.getElementById('reviews-list').insertAdjacentHTML('afterbegin', html);
+            document.getElementById('review-text').value = '';
+            alert('Review posted! Thank you.');
+        }
+    </script>
+</body>
+</html>
