@@ -240,11 +240,21 @@
     // ============================================================
     function initCalCom() {
         if (!CFG.calUsername) return;
+        // Hide placeholder, show embed
+        var ph = document.getElementById('cal-placeholder');
+        var em = document.getElementById('cal-embed');
+        if (ph) ph.style.display = 'none';
+        if (em) {
+            em.style.display = 'block';
+            em.setAttribute('data-cal-link', CFG.calUsername + '/' + (CFG.calEventType || '30min'));
+        }
         // Load Cal.com embed script
-        var script = document.createElement('script');
-        script.src = 'https://cal.com/embed.js';
-        script.async = true;
-        document.head.appendChild(script);
+        if (!document.querySelector('script[src*="cal.com/embed.js"]')) {
+            var script = document.createElement('script');
+            script.src = 'https://cal.com/embed.js';
+            script.async = true;
+            document.head.appendChild(script);
+        }
     }
 
     // ============================================================
