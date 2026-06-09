@@ -20,40 +20,25 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <!-- TOP UTILITY BAR -->
-    <div class="utility-bar">
-        <div class="max-w-5xl mx-auto px-4 flex items-center justify-between h-9">
-            <div class="flex items-center gap-4 text-xs">
-                <a href="{SCHEDULE_LINK}" class="text-white/80 hover:text-white transition">Schedule Service</a>
-                <a href="{SPECIALS_LINK}" class="text-white/80 hover:text-white transition">Special Offers</a>
-                <a href="{REVIEWS_LINK}" class="text-white/80 hover:text-white transition">Read Reviews</a>
-            </div>
-            <div class="flex items-center gap-3 text-xs">
-                {SOCIAL_ICONS}
-                <a href="{FINANCING_LINK}" class="text-yellow-400 hover:text-yellow-300 font-semibold transition">Get Financing</a>
-            </div>
-        </div>
-    </div>
 
     <!-- HEADER -->
     <header class="site-header">
-        <div class="max-w-5xl mx-auto px-4 flex items-center justify-between h-16">
-            <div class="flex items-center gap-4">
-                <a href="/" class="text-xl font-extrabold text-gray-900">{BIZ_NAME}</a>
-                {DEALER_BADGE}
-            </div>
-            <div class="flex items-center gap-6">
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-                    <a href="#services" class="hover:text-blue-600 transition">Services</a>
-                    <a href="#booking" class="hover:text-blue-600 transition">Book Online</a>
-                    <a href="#reviews" class="hover:text-blue-600 transition">Reviews</a>
-                    <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
-                </nav>
-                <div class="text-right">
-                    <p class="text-xs text-gray-500">Call 24/7</p>
-                    <a href="tel:{PHONE}" class="text-lg font-bold text-blue-600 hover:text-blue-700 transition whitespace-nowrap">{PHONE}</a>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+            <div class="flex items-center gap-3">
+                {LOGO_IMG}
+                <div>
+                    <a href="/" class="text-lg font-extrabold text-gray-900 leading-tight">{BIZ_NAME_SHORT}</a>
+                    <p class="text-xs text-gray-500">{CATEGORY} &bull; {CITY}</p>
                 </div>
-                <a href="{SCHEDULE_LINK}" class="btn-primary hidden sm:inline-flex">Book Now</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-gray-600">
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#booking" class="nav-link">Book Online</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                </nav>
+                <a href="tel:{PHONE}" class="header-phone">{PHONE}</a>
+                <a href="#booking" class="btn-primary hidden sm:inline-flex">Book Now</a>
             </div>
         </div>
     </header>
@@ -62,128 +47,130 @@
     <section class="hero">
         <div class="hero-bg" style="background-image: url('{HERO_IMG}');"></div>
         <div class="hero-overlay"></div>
-        <div class="max-w-5xl mx-auto px-4 relative z-10 py-16 sm:py-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 py-16 sm:py-20">
             <div class="max-w-2xl">
-                <span class="inline-block text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">{CATEGORY}</span>
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight">{BIZ_NAME}</h1>
-                <p class="mt-4 text-lg text-white/80 max-w-xl">{TAGLINE}</p>
+                <span class="hero-breadcrumb">{CATEGORY} in {CITY}</span>
+                <h1>{BIZ_NAME}</h1>
+                <p class="hero-tagline">{TAGLINE}</p>
                 <div class="flex flex-wrap gap-3 mt-8">
-                    <a href="tel:{PHONE}" class="btn-emergency-hero">{PHONE}</a>
-                    <a href="#booking" class="btn-hero-secondary">Book Online</a>
+                    <a href="tel:{PHONE}" class="btn-hero-call">{PHONE}</a>
+                    <a href="#booking" class="btn-hero-book">Book Online</a>
                 </div>
             </div>
         </div>
         <div class="hero-stats">
-            <div class="max-w-5xl mx-auto px-4 grid grid-cols-4 gap-4">
-                {HERO_STATS}
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-4 gap-4">
+                <div class="hero-stat"><div class="val">{STAT_YEARS}</div><div class="lbl">Years Experience</div></div>
+                <div class="hero-stat"><div class="val">{STAT_REVIEWS}</div><div class="lbl">Reviews</div></div>
+                <div class="hero-stat"><div class="val">24/7</div><div class="lbl">Emergency Service</div></div>
+                <div class="hero-stat"><div class="val">{STAT_SATISFACTION}</div><div class="lbl">Satisfaction</div></div>
             </div>
-        </div>
-    </section>
-
-    <!-- TRUST BADGES -->
-    <section class="badge-bar">
-        <div class="max-w-5xl mx-auto px-4 flex flex-wrap items-center gap-6 justify-center py-5">
-            {TRUST_BADGES}
         </div>
     </section>
 
     <!-- SPECIAL OFFERS -->
     {SPECIAL_OFFERS_SECTION}
 
-    <!-- MAIN CONTENT -->
-    <main class="max-w-5xl mx-auto px-4 py-10 space-y-12">
+    <!-- TRUST BADGES -->
+    <section class="badge-bar">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 py-4">
+            {TRUST_BADGES}
+        </div>
+    </section>
 
-        <!-- Emergency CTA -->
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+
+        <!-- Emergency -->
         {EMERGENCY_SECTION}
 
-        <!-- Services Grid -->
-        <section id="services">
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Our {CATEGORY} Services</h2>
-            <p class="text-gray-500 mb-8">Professional {CAT_LOWER} services backed by years of experience and real customer satisfaction.</p>
-            <div class="service-grid">
+        <!-- Services -->
+        <section id="services" class="mb-12">
+            <h2 class="section-title">Our {CATEGORY} Services</h2>
+            <p class="section-desc">Professional {CAT_LOWER} services backed by {STAT_YEARS_LOWER} of experience in {CITY} and the surrounding areas.</p>
+            <div class="service-grid mt-8">
                 {SERVICE_CARDS}
             </div>
         </section>
 
-        <!-- CTA Strip -->
-        <div class="cta-strip">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                    <h3 class="text-xl font-bold text-white">Ready to book?</h3>
-                    <p class="text-white/70 text-sm mt-1">Schedule your service online or call us directly.</p>
-                </div>
-                <div class="flex gap-3">
-                    <a href="#booking" class="btn-cta-primary">Book Now</a>
-                    <a href="tel:{PHONE}" class="btn-cta-secondary">{PHONE}</a>
-                </div>
-            </div>
-        </div>
-
         <!-- Booking Form -->
-        <section id="booking" class="booking-section">
-            <h2 class="text-2xl font-bold text-gray-900 mb-1">Book {CATEGORY} Service</h2>
-            <p class="text-gray-500 mb-6">Fill out the form and we'll confirm your appointment within 24 hours.</p>
-            <form id="booking-form" class="booking-form">
-                <input type="hidden" id="business-name" value="{BIZ_NAME}">
-                <input type="hidden" id="business-phone" value="{PHONE}">
-                <div class="form-grid">
-                    <div>
-                        <label class="form-label">Your Name *</label>
-                        <input type="text" id="customer-name" required class="form-input" placeholder="Jane Doe">
+        <section id="booking" class="mb-12">
+            <div class="booking-card">
+                <h2 class="section-title">Book {CATEGORY} Service</h2>
+                <p class="section-desc mb-6">Fill out the form and we'll confirm your appointment within 24 hours.</p>
+                <form id="booking-form">
+                    <input type="hidden" id="business-name" value="{BIZ_NAME}">
+                    <input type="hidden" id="business-phone" value="{PHONE}">
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label">Your Name *</label>
+                            <input type="text" id="customer-name" required class="form-input" placeholder="Jane Doe">
+                        </div>
+                        <div>
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" id="customer-phone" required class="form-input" placeholder="(812) 555-5555">
+                        </div>
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="email" id="customer-email" class="form-input" placeholder="jane@example.com">
+                        </div>
+                        <div>
+                            <label class="form-label">Service Needed *</label>
+                            <select id="service" required class="form-select">
+                                <option value="">Select a service...</option>
+                                {SERVICE_OPTIONS}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Date</label>
+                            <input type="date" id="date" class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Time</label>
+                            <input type="time" id="time" class="form-input">
+                        </div>
                     </div>
-                    <div>
-                        <label class="form-label">Phone Number *</label>
-                        <input type="tel" id="customer-phone" required class="form-input" placeholder="(812) 555-5555">
+                    <div class="mt-4">
+                        <label class="form-label">Describe Your Issue</label>
+                        <textarea id="notes" rows="3" class="form-input" placeholder="Tell us about what needs to be done..."></textarea>
                     </div>
-                    <div>
-                        <label class="form-label">Email</label>
-                        <input type="email" id="customer-email" class="form-input" placeholder="jane@example.com">
+                    <button type="submit" id="submit-btn" class="btn-submit mt-6">Submit Booking Request</button>
+                </form>
+                <div id="success-msg" class="hidden mt-6">
+                    <div class="success-card">
+                        <div class="text-5xl mb-3">&#x2705;</div>
+                        <h3 class="text-xl font-bold text-emerald-800">Booking Submitted!</h3>
+                        <p class="text-emerald-600 mt-2">We'll confirm your appointment within 24 hours.</p>
+                        <div id="booking-summary" class="mt-4 bg-white rounded-xl p-4 text-left text-sm text-gray-600 border border-emerald-100"></div>
+                        <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                            <button onclick="copyBooking()" class="btn-copy">Copy Details</button>
+                            <a href="tel:{PHONE}" class="btn-call">Call for Faster Service</a>
+                        </div>
                     </div>
-                    <div>
-                        <label class="form-label">Service Needed *</label>
-                        <select id="service" required class="form-select">
-                            <option value="">Select a service...</option>
-                            {SERVICE_OPTIONS}
-                        </select>
-                    </div>
-                    <div>
-                        <label class="form-label">Preferred Date</label>
-                        <input type="date" id="date" class="form-input">
-                    </div>
-                    <div>
-                        <label class="form-label">Preferred Time</label>
-                        <input type="time" id="time" class="form-input">
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <label class="form-label">Describe Your Issue</label>
-                    <textarea id="notes" rows="3" class="form-input" placeholder="Tell us about what needs to be done..."></textarea>
-                </div>
-                <button type="submit" id="submit-btn" class="btn-primary mt-6">
-                    Submit Booking Request
-                </button>
-            </form>
-            <div id="success-msg" class="hidden mt-6">
-                <div class="success-card">
-                    <div class="text-5xl mb-3">&#x2705;</div>
-                    <h3 class="text-xl font-bold text-emerald-800">Booking Submitted!</h3>
-                    <p class="text-emerald-600 mt-2">We'll confirm your appointment within 24 hours.</p>
-                    <div id="booking-summary" class="mt-4 bg-white rounded-xl p-4 text-left text-sm text-gray-600 border border-emerald-100"></div>
-                    <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
-                        <button onclick="copyBooking()" class="btn-copy">Copy Details</button>
-                        <a href="tel:{PHONE}" class="btn-call">Call for Faster Service</a>
-                    </div>
-                    <p class="text-xs text-emerald-500 mt-3">Tip: For emergencies, call <strong>{PHONE}</strong> for immediate service.</p>
                 </div>
             </div>
         </section>
 
+        <!-- CTA Strip -->
+        <div class="cta-strip mb-12">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Ready to Get Started?</h3>
+                    <p class="text-white/70 text-sm mt-1">Schedule your service online or call us directly.</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#booking" class="btn-cta-white">Book Now</a>
+                    <a href="tel:{PHONE}" class="btn-cta-ghost">{PHONE}</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Reviews -->
-        <section id="reviews">
+        <section id="reviews" class="mb-12">
             <div class="flex items-center justify-between mb-6">
                 <div>
-                    <h2 class="text-2xl font-bold text-gray-900">What Our Customers Say</h2>
-                    <p class="text-gray-500 text-sm mt-1">Real reviews from Evansville-area customers.</p>
+                    <h2 class="section-title">What Our Customers Say</h2>
+                    <p class="section-desc">Real reviews from {CITY}-area customers.</p>
                 </div>
                 {REVIEW_BADGE}
             </div>
@@ -192,37 +179,25 @@
             </div>
         </section>
 
-        <!-- Business Info -->
-        <section id="contact" class="info-section">
+        <!-- Info -->
+        <section id="contact" class="mb-12">
             <div class="info-grid">
                 <div class="info-block">
-                    <div class="info-icon">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Hours</h3>
+                    <h3>Hours</h3>
                     {HOURS_HTML}
                 </div>
                 <div class="info-block">
-                    <div class="info-icon">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Contact</h3>
+                    <h3>Contact</h3>
                     {CONTACT_HTML}
                 </div>
                 <div class="info-block">
-                    <div class="info-icon">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Service Area</h3>
+                    <h3>Service Area</h3>
                     <div class="flex flex-wrap gap-1.5 mt-1">
                         {AREA_CHIPS}
                     </div>
                 </div>
                 <div class="info-block">
-                    <div class="info-icon">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                    </div>
-                    <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Payment Methods</h3>
+                    <h3>Payment Methods</h3>
                     <div class="flex flex-wrap gap-1.5 mt-1">
                         {PAYMENT_CHIPS}
                     </div>
@@ -234,26 +209,31 @@
 
     <!-- FOOTER -->
     <footer class="site-footer">
-        <div class="max-w-5xl mx-auto px-4 py-10">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-10">
                 <div>
-                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">{BIZ_NAME}</h4>
-                    <p class="text-gray-400 text-sm mt-2">{TAGLINE}</p>
+                    <div class="flex items-center gap-3 mb-3">
+                        {LOGO_IMG_FOOTER}
+                        <div>
+                            <p class="font-bold text-white">{BIZ_NAME_SHORT}</p>
+                            <p class="text-xs text-gray-400">{CATEGORY}</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed">{TAGLINE}</p>
                     {DEALER_BADGE_FOOTER}
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Quick Links</h4>
-                    <ul class="mt-3 space-y-2 text-sm text-gray-400">
-                        <li><a href="#services" class="hover:text-white transition">Services</a></li>
-                        <li><a href="#booking" class="hover:text-white transition">Book Online</a></li>
-                        <li><a href="#reviews" class="hover:text-white transition">Reviews</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#booking">Book Online</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold text-white uppercase tracking-wider">Contact</h4>
-                    <ul class="mt-3 space-y-2 text-sm text-gray-400">
-                        <li><a href="tel:{PHONE}" class="hover:text-white transition">{PHONE}</a></li>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:{PHONE}" class="text-white font-semibold">{PHONE}</a></li>
                         <li>{ADDRESS_LINE}</li>
                         {EMAIL_LINE}
                     </ul>
@@ -261,14 +241,14 @@
             </div>
         </div>
         <div class="border-t border-gray-800">
-            <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-                <p>&copy; 2026 {BIZ_NAME}. All rights reserved.</p>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>&copy; 2026 {BIZ_NAME_SHORT}. All rights reserved.</p>
                 <p>Powered by Evansville Booking Sites</p>
             </div>
         </div>
     </footer>
 
-    <!-- STICKY MOBILE CTA -->
+    <!-- STICKY MOBILE -->
     <div class="sticky-cta">
         <a href="tel:{PHONE}" class="sticky-btn bg-green-600">Call Now</a>
         <a href="#booking" class="sticky-btn bg-blue-600">Book Online</a>
@@ -310,9 +290,9 @@
             try { fetch("https://formsubmit.co/ajax/evansvillebookings@gmail.com", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ _subject: "New Booking - " + bizName + " - " + name, business: bizName, customerName: name, phone, email, service, date: booking.date, time: booking.time, notes, _template: "table" }) }).catch(function(){}); } catch(e) {}
         });
         function copyBooking() {
-            const summary = document.getElementById('booking-summary');
-            const text = summary.innerText || summary.textContent;
-            navigator.clipboard.writeText(text).then(function() { const toast = document.getElementById('toast'); toast.textContent = 'Booking details copied!'; toast.style.display = 'block'; setTimeout(function() { toast.style.display = 'none'; }, 3000); }).catch(function() { alert('Copy failed.'); });
+            const el = document.getElementById('booking-summary');
+            const txt = el.innerText || el.textContent;
+            navigator.clipboard.writeText(txt).then(function() { const t = document.getElementById('toast'); t.textContent = 'Booking details copied!'; t.style.display = 'block'; setTimeout(function() { t.style.display = 'none'; }, 3000); }).catch(function() { alert('Copy failed.'); });
         }
     </script>
 </body>
