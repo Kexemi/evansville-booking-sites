@@ -31,8 +31,8 @@
                     <p class="text-xs text-gray-500">{CATEGORY} &bull; {CITY}</p>
                 </div>
             </div>
-            <div class="flex items-center gap-6">
-                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700">
+            <div class="flex items-center gap-4">
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-600">
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#booking" class="nav-link">Book Online</a>
                     <a href="#reviews" class="nav-link">Reviews</a>
@@ -55,7 +55,7 @@
                 <p class="hero-tagline">{TAGLINE}</p>
                 <div class="flex flex-wrap gap-3 mt-8">
                     <a href="tel:{PHONE}" class="btn-hero-call">{PHONE}</a>
-                    <a href="#booking" class="btn-hero-book-solid">Book Online</a>
+                    <a href="#booking" class="btn-hero-book">Book Online</a>
                 </div>
             </div>
         </div>
@@ -80,9 +80,9 @@
     </section>
 
     <!-- MAIN CONTENT -->
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-12">
 
-        <!-- Emergency -->
+        <!-- Emergency CTA -->
         {EMERGENCY_SECTION}
 
         <!-- Services -->
@@ -95,7 +95,7 @@
         </section>
 
         <!-- Booking Form -->
-        <section id="booking" class="mb-12">
+        <section id="booking">
             <div class="booking-card">
                 <h2 class="section-title">Book {CATEGORY} Service</h2>
                 <p class="section-desc mb-6">Fill out the form and we'll confirm your appointment within 24 hours.</p>
@@ -152,9 +152,22 @@
             </div>
         </section>
 
+        <!-- CTA Strip -->
+        <div class="cta-strip mb-12">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Ready to Get Started?</h3>
+                    <p class="text-white/70 text-sm mt-1">Schedule your service online or call us directly.</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#booking" class="btn-cta-white">Book Now</a>
+                    <a href="tel:{PHONE}" class="btn-cta-ghost">{PHONE}</a>
+                </div>
+            </div>
+        </div>
 
         <!-- Reviews -->
-        <section id="reviews" class="mb-12">
+        <section id="reviews">
             <div class="flex items-center justify-between mb-6">
                 <div>
                     <h2 class="section-title">What Our Customers Say</h2>
@@ -216,6 +229,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#booking">Book Online</a></li>
                         <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div>
@@ -231,7 +245,7 @@
         <div class="border-t border-gray-800">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
                 <p>&copy; 2026 {BIZ_NAME_SHORT}. All rights reserved.</p>
-                <p>{BIZ_NAME_SHORT} &bull; Local family-owned since {STAT_YEARS_SHORT}</p>
+                <p>Powered by Evansville Booking Sites</p>
             </div>
         </div>
     </footer>
@@ -278,8 +292,8 @@
             try { fetch("https://formsubmit.co/ajax/evansvillebookings@gmail.com", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ _subject: "New Booking - " + bizName + " - " + name, business: bizName, customerName: name, phone, email, service, date: booking.date, time: booking.time, notes, _template: "table" }) }).catch(function(){}); } catch(e) {}
         });
         function copyBooking() {
-            const el = document.getElementById('booking-summary');
-            const txt = el.innerText || el.textContent;
+            const summary = document.getElementById('booking-summary');
+            const txt = summary.innerText || summary.textContent;
             navigator.clipboard.writeText(txt).then(function() { const t = document.getElementById('toast'); t.textContent = 'Booking details copied!'; t.style.display = 'block'; setTimeout(function() { t.style.display = 'none'; }, 3000); }).catch(function() { alert('Copy failed.'); });
         }
     </script>
