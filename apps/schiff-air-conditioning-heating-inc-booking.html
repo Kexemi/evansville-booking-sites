@@ -109,19 +109,82 @@
     <link rel="stylesheet" href="https://kexemi.github.io/evansville-booking-sites/tailwind.css">
     <link rel="manifest" href="manifest.json">
     <style>
-        * { font-family: 'Inter', system-ui, sans-serif; }
+        /* ===== DESIGN SYSTEM ===== */
+        * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
         .star { color: #f59e0b; }
-        .review-card { transition: all 0.2s; }
-        .review-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        @media (max-width: 640px) {
-            .hero-phone { font-size: 1.5rem !important; }
-        }
-        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; display: none; }
-        @media (max-width: 768px) {
-            .sticky-cta { display: flex; }
-            body { padding-bottom: 70px; }
-        }
-        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 100; background: #16a34a; color: white; padding: 12px 24px; border-radius: 12px; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: none; }
+        
+        /* Hero treatment */
+        .hero-section { position: relative; overflow: hidden; }
+        .hero-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%); pointer-events: none; }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-glass { background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.18); }
+        
+        /* Review cards with quote styling */
+        .review-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 12px; padding: 20px; position: relative; transition: all 0.25s ease; }
+        .review-card::before { content: 'C'; position: absolute; top: 8px; left: 14px; font-size: 48px; color: #e5e7eb; font-family: Georgia, serif; line-height: 1; }
+        .review-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.07); border-color: #d1d5db; }
+        .review-card p { padding-left: 8px; position: relative; z-index: 1; }
+        
+        /* Emergency CTA with subtle pulse */
+        .emergency-cta { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); position: relative; overflow: hidden; }
+        .emergency-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 60%); }
+        .emergency-cta .pulse-ring { position: absolute; width: 200px; height: 200px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); top: -40px; right: -40px; animation: pulseRing 3s ease-in-out infinite; }
+        @keyframes pulseRing { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 0.2; } }
+        
+        /* Trust badges with icon circles */
+        .trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); padding: 6px 14px; border-radius: 20px; font-size: 0.8125rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.12); }
+        .trust-badge .icon { width: 16px; height: 16px; border-radius: 50%; background: rgba(74, 222, 128, 0.3); display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #86efac; flex-shrink: 0; }
+        
+        /* Offer cards */
+        .offer-card { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1px solid #fde68a; border-radius: 12px; padding: 16px; }
+        .offer-card .offer-icon { width: 32px; height: 32px; background: #f59e0b; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; color: white; flex-shrink: 0; }
+        
+        /* Service chips */
+        .service-chip { display: inline-block; font-size: 0.75rem; background: #eff6ff; color: #1d4ed8; padding: 4px 10px; border-radius: 6px; font-weight: 500; transition: all 0.15s; }
+        .service-chip:hover { background: #dbeafe; }
+        
+        /* Payment method cards */
+        .payment-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; background: #f3f4f6; color: #374151; padding: 6px 12px; border-radius: 8px; font-weight: 600; border: 1px solid #e5e7eb; }
+        .payment-chip.visa { background: #1a1f71; color: white; border-color: #1a1f71; }
+        .payment-chip.mastercard { background: linear-gradient(135deg, #eb001b 30%, #f79e1b 70%); color: white; border: none; }
+        .payment-chip.amex { background: #2e77bc; color: white; border-color: #2e77bc; }
+        .payment-chip.discover { background: #ff6000; color: white; border-color: #ff6000; }
+        
+        /* Section headings */
+        .section-title { font-size: 1.25rem; font-weight: 700; color: #111827; }
+        .section-subtitle { font-size: 0.875rem; color: #6b7280; }
+        
+        /* CTA buttons refined */
+        .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; padding: 14px 24px; border-radius: 12px; transition: all 0.2s; cursor: pointer; border: none; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.25); }
+        .btn-emergency { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; padding: 14px 24px; border-radius: 12px; transition: all 0.2s; }
+        .btn-emergency:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(220,38,38,0.25); }
+        
+        /* Sticky CTA */
+        .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; display: none; background: #fff; border-top: 1px solid #e5e7eb; padding: 12px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
+        @media (max-width: 768px) { .sticky-cta { display: flex; } body { padding-bottom: 76px; } }
+        
+        .toast { position: fixed; bottom: 84px; left: 50%; transform: translateX(-50%); z-index: 100; background: #16a34a; color: white; padding: 12px 24px; border-radius: 12px; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: none; font-size: 0.875rem; }
+        
+        /* Form inputs refined */
+        .form-input { width: 100%; border: 1px solid #d1d5db; border-radius: 10px; padding: 10px 14px; font-size: 0.9375rem; transition: all 0.2s; background: #fff; }
+        .form-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+        
+        /* CTA dual button area */
+        .cta-dual { display: grid; gap: 12px; }
+        @media (min-width: 640px) { .cta-dual { grid-template-columns: 1fr 1fr; } }
+        
+        /* Card container */
+        .info-card { background: #fff; border-radius: 16px; border: 1px solid #f0f0f0; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        
+        /* Responsive hero phone */
+        @media (max-width: 640px) { .hero-phone { font-size: 1.5rem !important; } }
+        
+        /* Booking card */
+        .booking-card { background: #fff; border-radius: 16px; border: 1px solid #e5e7eb; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); scroll-margin-top: 16px; }
+        
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800">
@@ -134,41 +197,42 @@
     </div>
 
     <!-- Hero -->
-    <header class="relative" style="background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://kexemi.github.io/evansville-booking-sites/assets/hero-hvac.jpg') center/cover no-repeat;">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+    <header class="hero-section" style="background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%), url('https://kexemi.github.io/evansville-booking-sites/assets/hero-hvac.jpg') center/cover no-repeat;">
+        <div class="hero-content max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                 <div class="text-white">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="text-2xl">❄️</span>
-                        <span class="text-sm text-blue-200 font-medium uppercase tracking-wide">HVAC</span>
+                        <span class="text-sm text-white/80 font-semibold uppercase tracking-widest">HVAC</span>
                     </div>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight">Schiff Air Conditioning & Heating Inc</h1>
-                    <p class="mt-2 text-blue-100 text-base max-w-xl">We're not comfortable until you are</p>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">Schiff Air Conditioning & Heating Inc</h1>
+                    <p class="mt-3 text-white/80 text-base max-w-xl">We're not comfortable until you are</p>
                 </div>
-                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/20 shrink-0 text-center">
-                    <a href="tel:(812) 423-0056" class="hero-phone block text-2xl sm:text-3xl font-bold text-white hover:text-blue-200 transition whitespace-nowrap">📞 (812) 423-0056</a>
-                    <p class="text-xs text-blue-200 mt-1">Click to call • Available now</p>
+                <div class="hero-glass rounded-2xl p-4 sm:p-6 shrink-0 text-center min-w-[220px]">
+                    <p class="text-xs text-white/70 uppercase tracking-wider font-medium">Call 24/7</p>
+                    <a href="tel:(812) 423-0056" class="hero-phone block text-2xl sm:text-3xl font-bold text-white hover:text-white/80 transition whitespace-nowrap mt-1">(812) 423-0056</a>
+                    <p class="text-xs text-white/60 mt-1">Click to call • Available now</p>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Trust Badges -->
-    <div class="bg-white border-b">
+    <!-- Credentials Bar -->
+    <div class="bg-white border-b border-gray-100">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4">
             <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
-                                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> 39+ Years Experience</span>
-                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> Carrier® Authorized Dealer</span>
-                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> 23 Five-Star Reviews</span>
-                <span class="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm"><span class="text-green-300">✓</span> 24/7 Emergency Service</span>
+                                <span class="trust-badge"><span class="icon">✓</span> 39+ Years Experience</span>
+                <span class="trust-badge"><span class="icon">✓</span> Carrier® Authorized Dealer</span>
+                <span class="trust-badge"><span class="icon">✓</span> 23 Five-Star Reviews</span>
+                <span class="trust-badge"><span class="icon">✓</span> 24/7 Emergency Service</span>
             </div>
         </div>
     </div>
 
     <!-- Special Offers -->
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-6"><div class="grid sm:grid-cols-3 gap-3">                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Seasonal Tune-Up Special</p></div></div>
-                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">$99 Annual Maintenance Plan</p></div></div>
-                <div class="bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3"><span class="text-2xl">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Financing Available</p></div></div></div></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 pt-6"><div class="grid sm:grid-cols-3 gap-3">                <div class="offer-card flex items-center gap-3"><span class="offer-icon">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Seasonal Tune-Up Special</p></div></div>
+                <div class="offer-card flex items-center gap-3"><span class="offer-icon">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">$99 Annual Maintenance Plan</p></div></div>
+                <div class="offer-card flex items-center gap-3"><span class="offer-icon">🏷️</span><div><p class="font-semibold text-amber-800 text-sm">Financing Available</p></div></div></div></div>
 
     <!-- Main Content -->
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
@@ -185,34 +249,34 @@
                     </a>
                 </div>
 
-        <!-- Dual CTA -->
-        <div class="grid sm:grid-cols-2 gap-4">
-            <a href="#booking" class="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 rounded-xl transition shadow-md hover:shadow-lg">
+        <!-- Primary CTAs -->
+        <div class="cta-dual">
+            <a href="#booking" class="btn-primary bg-blue-600 hover:bg-blue-700 text-white text-lg shadow-md">
                 📅 Schedule Tune-Up
             </a>
-            <a href="tel:(812) 423-0056" class="flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold text-lg py-4 rounded-xl transition shadow-md hover:shadow-lg">🆘 24/7 Emergency Service</a>
+            <a href="tel:(812) 423-0056" class="btn-emergency bg-red-600 hover:bg-red-700 text-white text-lg shadow-md">🆘 24/7 Emergency Service</a>
         </div>
 
-        <!-- Business Info -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+        <!-- Business Quick Info -->
+        <div class="info-card">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
                 <div class="flex items-start gap-3">
-                    <span class="text-xl mt-0.5">📍</span>
-                    <div><p class="font-semibold text-gray-900">Address</p><p class="text-gray-600">1315 W Columbia St, Evansville, IN 47710</p></div>
+                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 shrink-0">📍</div>
+                    <div><p class="font-semibold text-gray-900">Address</p><p class="text-gray-600 mt-0.5">1315 W Columbia St, Evansville, IN 47710</p></div>
                 </div>
                 <div class="flex items-start gap-3">
-                    <span class="text-xl mt-0.5">📞</span>
-                    <div><p class="font-semibold text-gray-900">Phone</p><a href="tel:(812) 423-0056" class="text-blue-600 hover:underline font-medium">(812) 423-0056</a></div>
+                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 shrink-0">📞</div>
+                    <div><p class="font-semibold text-gray-900">Phone</p><a href="tel:(812) 423-0056" class="text-blue-600 hover:underline font-medium mt-0.5 block">(812) 423-0056</a></div>
                 </div>
                 <div class="flex items-start gap-3">
-                    <span class="text-xl mt-0.5">🌐</span>
-                    <div><p class="font-semibold text-gray-900">Website</p><a href="https://schiffair.com" target="_blank" class="text-blue-600 hover:underline font-medium break-all">schiffair.com</a></div>
+                    <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 shrink-0">🌐</div>
+                    <div><p class="font-semibold text-gray-900">Website</p><a href="https://schiffair.com" target="_blank" class="text-blue-600 hover:underline font-medium mt-0.5 block break-all">schiffair.com</a></div>
                 </div>
             </div>
         </div>
 
         <!-- Booking Form -->
-        <div id="booking" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 scroll-mt-4">
+        <div id="booking" class="booking-card">
             <h2 class="text-2xl font-bold text-gray-900 mb-1">Book HVAC Service</h2>
             <p class="text-sm text-gray-500 mb-6">Fill out the form and we'll confirm your appointment within 24 hours.</p>
 
@@ -377,7 +441,7 @@
                 </div>
                 <div>
                     <h3 class="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Payment Methods</h3>
-                    <div class="flex flex-wrap gap-2"><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">Visa</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">MasterCard</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">Discover</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">American Express</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">Cash</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">Check</span><span class="inline-flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2.5 py-1.5 rounded-md font-medium">Financing with Approved Credit</span></div>
+                    <div class="flex flex-wrap gap-2"><span class="payment-chip visa">VI</span><span class="payment-chip mastercard">MC</span><span class="payment-chip discover">DS</span><span class="payment-chip amex">AE</span><span class="payment-chip"></span><span class="payment-chip"></span><span class="payment-chip"></span></div>
                 </div>
             </div>
         </div>
