@@ -65,8 +65,8 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
     position: absolute; inset: 0;
     background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 90%);
 }
-.hero h1 { color: #fff; font-size: 2.5rem; }
-.hero-tagline { color: rgba(255,255,255,0.85); font-size: 1.125rem; margin-top: 8px; max-width: 520px; }
+.hero h1 { color: #fff; font-size: 2.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.hero-tagline { color: rgba(255,255,255,0.9); font-size: 1.125rem; margin-top: 8px; max-width: 520px; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
 .hero-breadcrumb {
     display: inline-block; font-size: 0.75rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.08em;
