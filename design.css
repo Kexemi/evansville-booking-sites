@@ -63,7 +63,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 }
 .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 70%, transparent 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 90%);
 }
 .hero h1 { color: #fff; font-size: 2.5rem; }
 .hero-tagline { color: rgba(255,255,255,0.85); font-size: 1.125rem; margin-top: 8px; max-width: 520px; }
@@ -109,7 +109,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 .badge-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 /* --- EMERGENCY CTA --- */
-.emergency-card { background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+.emergency-card { background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 24px 28px; }
 .emergency-card .title { font-size: 1.125rem; font-weight: 700; color: #b91c1c; }
 .emergency-card .sub { font-size: 0.875rem; color: #ef4444; margin-top: 2px; }
 .emergency-card .phone { font-size: 1.25rem; font-weight: 700; color: #b91c1c; white-space: nowrap; }
@@ -132,7 +132,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 14px;
 }
-.service-card h3 { font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 6px; }
+.service-card h3 { font-size: 1.0625rem; font-weight: 700; color: #111827; margin-bottom: 6px; }
 .service-card p { font-size: 0.875rem; color: #6b7280; line-height: 1.55; margin: 0; }
 
 /* --- CTA STRIP --- */
@@ -206,7 +206,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 @media (min-width: 640px) { .info-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .info-grid { grid-template-columns: repeat(4, 1fr); } }
 .info-block {
-    background: #f9fafb; border: 1px solid #f0f0f0; border-radius: 10px; padding: 20px;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;
 }
 .info-block h3 { font-size: 0.75rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
 .info-block p { font-size: 0.875rem; color: #374151; line-height: 1.5; margin: 0 0 2px; }
@@ -220,7 +220,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 .dealer-badge { display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; border: 1px solid #86efac; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #166534; }
 
 /* --- FOOTER --- */
-.site-footer { background: #111827; color: #9ca3af; margin-top: 48px; }
+.site-footer { background: #111827; color: #9ca3af; margin-top: 0; }
 .site-footer h4 { color: #f1f5f9; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
 .site-footer a { color: #9ca3af; font-size: 0.875rem; transition: color 0.15s; }
 .site-footer a:hover { color: #fff; }
@@ -251,6 +251,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 
 /* --- SPACING --- */
 main { min-height: 50vh; }
-.mb-12 { margin-bottom: 3rem; }
-@media (max-width: 640px) { .mb-12 { margin-bottom: 2rem; } }
+.section-alt { background: #f9fafb; padding: 48px 0; margin: 0 -1rem; }
+.mb-12 { margin-bottom: 4rem; }
+@media (max-width: 640px) { .mb-12 { margin-bottom: 3rem; } }
 .mt-8 { margin-top: 2rem; }
