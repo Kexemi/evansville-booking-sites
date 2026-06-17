@@ -11,6 +11,7 @@
     <meta property="og:url" content="{OG_URL}">
     <meta name="geo.region" content="US-IN">
     <meta name="geo.placename" content="Evansville">
+    <link rel="canonical" href="{OG_URL}">
     <script type="application/ld+json">{SCHEMA_JSON}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media=all">
@@ -37,6 +38,7 @@
                     <a href="#booking" class="nav-link">Book Online</a>
                     <a href="#reviews" class="nav-link">Reviews</a>
                     <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
                 </nav>
                 <a href="tel:{PHONE}" class="header-phone">{PHONE}</a>
                 <a href="#booking" class="btn-primary hidden lg:inline-flex">Book Now</a>
@@ -180,6 +182,30 @@
             </div>
         </section>
 
+        <!-- FAQ -->
+        <section id="faq" class="section-alt">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-desc">Quick answers about our {CAT_LOWER} services in {CITY}.</p>
+            <div class="faq-grid mt-8">
+                <details class="faq-item">
+                    <summary>Do you offer 24/7 emergency {CAT_LOWER} service?</summary>
+                    <p>Yes, we provide 24/7 emergency {CAT_LOWER} service throughout {CITY} and surrounding areas. Call {PHONE} for immediate assistance.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What areas do you serve?</summary>
+                    <p>We serve {CITY} and the surrounding communities including {AREA_CHIPS}. Check our service area map above or call us to confirm coverage for your location.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you offer maintenance plans?</summary>
+                    <p>Yes, we offer annual maintenance agreements starting at $99/year to keep your system running at peak efficiency and prevent costly breakdowns.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Are you licensed and insured?</summary>
+                    <p>Absolutely. We are fully licensed, bonded, and insured. Our technicians are certified and background-checked for your peace of mind.</p>
+                </details>
+            </div>
+        </section>
+
         <!-- Info -->
         <section id="contact" class="section-alt">
             <div class="info-grid">
@@ -208,6 +234,46 @@
 
     </main>
 
+    <!-- ADMIN DASHBOARD -->
+    <section id="admin" class="admin-section hidden">
+        <div class="admin-container max-w-5xl mx-auto px-4 sm:px-6 py-10">
+            <h2 class="section-title mb-6">Admin Dashboard</h2>
+            <div id="admin-login" class="admin-login">
+                <p class="text-gray-600 mb-4">Enter the last 6 digits of the business phone number to access bookings.</p>
+                <div class="flex gap-2 mb-4">
+                    <input type="password" id="admin-pass" class="form-input flex-1" placeholder="Password (last 6 digits of phone)">
+                    <button onclick="adminLogin()" class="btn-submit">Access Dashboard</button>
+                </div>
+                <p id="admin-error" class="text-red-600 text-sm hidden">Incorrect password</p>
+            </div>
+            <div id="admin-content" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold">All Bookings</h3>
+                    <button onclick="adminLogout()" class="btn-copy">Logout</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="admin-table w-full">
+                        <thead>
+                            <tr>
+                                <th>Date/Time</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Service</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bookings"></tbody>
+                    </table>
+                </div>
+                <div class="mt-4 flex gap-2">
+                    <button onclick="exportBookingsCSV()" class="btn-copy">Export CSV</button>
+                    <button onclick="clearAllBookings()" class="btn-call bg-red-600 hover:bg-red-700">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="site-footer">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
@@ -230,6 +296,7 @@
                         <li><a href="#booking">Book Online</a></li>
                         <li><a href="#reviews">Reviews</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div>
@@ -289,6 +356,7 @@
             if (notes) h += '<p><strong>Notes:</strong> ' + notes + '</p>';
             h += '</div>';
             summary.innerHTML = h;
+            summary.dataset.latest = JSON.stringify(booking);
             try { fetch("https://formsubmit.co/ajax/evansvillebookings@gmail.com", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify({ _subject: "New Booking - " + bizName + " - " + name, business: bizName, customerName: name, phone, email, service, date: booking.date, time: booking.time, notes, _template: "table" }) }).catch(function(){}); } catch(e) {}
         });
         function copyBooking() {
@@ -296,6 +364,74 @@
             const txt = summary.innerText || summary.textContent;
             navigator.clipboard.writeText(txt).then(function() { const t = document.getElementById('toast'); t.textContent = 'Booking details copied!'; t.style.display = 'block'; setTimeout(function() { t.style.display = 'none'; }, 3000); }).catch(function() { alert('Copy failed.'); });
         }
+
+        // Admin Dashboard Functions
+        const ADMIN_PHONE_SUFFIX = '{PHONE}'.replace(/\D/g, '').slice(-6);
+        function adminLogin() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === ADMIN_PHONE_SUFFIX) {
+                document.getElementById('admin-login').classList.add('hidden');
+                document.getElementById('admin-content').classList.remove('hidden');
+                document.getElementById('admin-error').classList.add('hidden');
+                renderAdminBookings();
+            } else {
+                document.getElementById('admin-error').classList.remove('hidden');
+            }
+        }
+        function adminLogout() {
+            document.getElementById('admin-login').classList.remove('hidden');
+            document.getElementById('admin-content').classList.add('hidden');
+            document.getElementById('admin-pass').value = '';
+        }
+        function renderAdminBookings() {
+            const bookings = getBookings();
+            const tbody = document.getElementById('admin-bookings');
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-gray-500">No bookings yet</td></tr>';
+                return;
+            }
+            tbody.innerHTML = bookings.map(b => `
+                <tr>
+                    <td class="py-3 px-4 border-b">${new Date(b.createdAt).toLocaleString()}</td>
+                    <td class="py-3 px-4 border-b">${b.customerName}</td>
+                    <td class="py-3 px-4 border-b"><a href="tel:${b.phone}" class="text-blue-600 hover:underline">${b.phone}</a></td>
+                    <td class="py-3 px-4 border-b">${b.service}</td>
+                    <td class="py-3 px-4 border-b">${b.notes}</td>
+                    <td class="py-3 px-4 border-b"><button onclick="deleteBooking(${b.id})" class="text-red-600 hover:underline text-sm">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+        function deleteBooking(id) {
+            if (!confirm('Delete this booking?')) return;
+            const bookings = getBookings().filter(b => b.id !== id);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            renderAdminBookings();
+        }
+        function exportBookingsCSV() {
+            const bookings = getBookings();
+            if (bookings.length === 0) { alert('No bookings to export'); return; }
+            const headers = ['ID', 'Business', 'Customer', 'Phone', 'Email', 'Service', 'Date', 'Time', 'Notes', 'Created'];
+            const rows = bookings.map(b => [b.id, b.business, b.customerName, b.phone, b.email || '', b.service, b.date, b.time, b.notes, b.createdAt]);
+            const csv = [headers, ...rows].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'bookings-' + new Date().toISOString().split('T')[0] + '.csv';
+            a.click(); URL.revokeObjectURL(url);
+        }
+        function clearAllBookings() {
+            if (!confirm('Clear ALL bookings? This cannot be undone.')) return;
+            localStorage.setItem('bookings', '[]');
+            renderAdminBookings();
+        }
+
+        // Auto-show admin section if ?admin=1 in URL
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('admin') === '1') {
+                document.getElementById('admin').classList.remove('hidden');
+            }
+        })();
     </script>
 </body>
 </html>

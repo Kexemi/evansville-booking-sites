@@ -207,6 +207,26 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
     font-size: 0.8125rem; font-weight: 600; color: #92400e; white-space: nowrap;
 }
 
+/* --- FAQ --- */
+.faq-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 768px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
+.faq-item {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    overflow: hidden;
+}
+.faq-item summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; cursor: pointer; font-weight: 600; color: #1f2937;
+    font-size: 0.9375rem; list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+    content: '+'; font-size: 1.25rem; font-weight: 600; color: #6b7280;
+    transition: transform 0.2s;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { padding: 0 20px 16px; margin: 0; color: #6b7280; line-height: 1.6; font-size: 0.875rem; }
+
 /* --- INFO --- */
 .info-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
 @media (min-width: 640px) { .info-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -225,6 +245,17 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 .pay-generic { background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; }
 .dealer-badge { display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; border: 1px solid #86efac; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #166534; }
 
+/* --- ADMIN DASHBOARD --- */
+.admin-section { background: #f9fafb; border-top: 1px solid #e5e7eb; margin-top: 0; }
+.admin-container { max-width: 900px; }
+.admin-login { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 32px; max-width: 400px; margin: 0 auto; text-align: center; }
+.admin-login .form-input { margin-bottom: 12px; }
+.admin-table { border-collapse: collapse; font-size: 0.875rem; }
+.admin-table th, .admin-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.admin-table th { background: #f9fafb; font-weight: 600; color: #374151; white-space: nowrap; }
+.admin-table tbody tr:hover { background: #f9fafb; }
+.admin-table button { background: none; border: none; padding: 2px 8px; font-size: 0.8125rem; cursor: pointer; }
+
 /* --- FOOTER --- */
 .site-footer { background: #111827; color: #9ca3af; margin-top: 0; }
 .site-footer h4 { color: #f1f5f9; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
@@ -238,7 +269,7 @@ h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
 .sticky-cta {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
     display: none; background: #fff; border-top: 1px solid #e5e7eb;
-    padding: 12px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); gap: 10px;
+    padding: 12px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
 }
 @media (max-width: 768px) {
     .sticky-cta { display: flex; }
