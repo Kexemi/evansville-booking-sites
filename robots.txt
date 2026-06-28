@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /scripts/
+Disallow: /artifacts/
+Disallow: /pricing-offer-sheet.html
+Disallow: /sales-scripts.html
+Disallow: /link-pack.html
+Sitemap: https://kexemi.github.io/evansville-booking-sites/sitemap.xml

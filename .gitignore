@@ -33,3 +33,6 @@ venv/
 
 # Logs
 *.log
+
+# Local verification receipts (kept in vault closeout, not GitHub Pages)
+artifacts/
