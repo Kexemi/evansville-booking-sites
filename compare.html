@@ -4,12 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compare — Evansville Booking Sites</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="tailwind.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { font-family: 'Inter', system-ui, sans-serif; }
+* { font-family: 'Inter', system-ui, sans-serif; box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
 iframe { transition: all 0.3s ease; }
+.compare-controls { flex-wrap: wrap; max-width: 100%; }
+#biz-select { max-width: min(100%, 260px); }
+.device-selector { flex: 0 0 auto; }
+#their-container, #our-container { max-width: 100%; }
+#their-frame, #our-frame { display: block; max-width: 100%; }
+@media (max-width: 640px) {
+  .compare-controls { width: 100%; }
+  #biz-select { flex: 1 1 100%; width: 100%; max-width: 100%; }
+  .device-selector { flex: 1 1 auto; }
+  .device-btn { flex: 1 1 0; }
+}
 .device-btn { transition: all 0.15s ease; }
 .device-btn:hover { transform: translateY(-1px); }
 .device-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
@@ -26,16 +38,16 @@ iframe { transition: all 0.3s ease; }
       <h1 class="text-xl font-bold text-white">Side-by-Side Comparison</h1>
       <p class="text-sm text-gray-400">Their site vs. your new site — on any device</p>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="compare-controls flex items-center gap-2">
       <!-- Business selector -->
       <select id="biz-select" class="bg-gray-800 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm">
         <option value="">Select a business...</option>
       </select>
       <!-- Device selector -->
-      <div class="flex bg-gray-800 rounded-lg border border-gray-600 overflow-hidden">
-        <button class="device-btn active px-3 py-2 text-sm text-white" onclick="setDevice(this, window.innerWidth)" data-label="Desktop">💻</button>
-        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" onclick="setDevice(this, 768)" data-label="Tablet">📱</button>
-        <button class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" onclick="setDevice(this, 375)" data-label="Mobile">📲</button>
+      <div class="device-selector flex bg-gray-800 rounded-lg border border-gray-600 overflow-hidden">
+        <button type="button" class="device-btn active px-3 py-2 text-sm text-white" data-width="100%" data-label="Desktop">💻</button>
+        <button type="button" class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="768px" data-label="Tablet">📱</button>
+        <button type="button" class="device-btn px-3 py-2 text-sm text-gray-400 hover:text-white" data-width="375px" data-label="Mobile">📲</button>
       </div>
     </div>
   </div>
@@ -49,8 +61,13 @@ iframe { transition: all 0.3s ease; }
       <div class="side-label label-current">🔴 THEIR CURRENT SITE</div>
       <div class="mt-7 flex items-center justify-center bg-gray-100 text-xs text-gray-400 py-1" id="their-url-label">Loading...</div>
       <div class="flex justify-center bg-gray-50" style="overflow:hidden;height:600px">
-        <div id="their-container" style="width:100%;height:100%;overflow:hidden;display:flex;align-items:flex-start;justify-content:center">
-          <iframe id="their-frame" src="" style="border:none;transform-origin:top center;" sandbox="allow-scripts allow-same-origin" loading="lazy" onload="resizeFrame(this, 'their')"></iframe>
+        <div id="their-container" style="width:100%;height:100%;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;position:relative">
+          <div id="their-fallback" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center bg-gray-100 text-gray-700">
+            <p class="font-semibold">This current site blocks embedded comparison.</p>
+            <p class="text-sm text-gray-500">Use the link below for their current site; the new-site preview remains embedded.</p>
+            <a id="their-fallback-link" target="_blank" class="text-blue-600 underline font-semibold">Open current site →</a>
+          </div>
+          <iframe id="their-frame" src="" style="border:none;width:100%;height:600px;" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -63,7 +80,7 @@ iframe { transition: all 0.3s ease; }
       </div>
       <div class="flex justify-center bg-gray-50" style="overflow:hidden;height:600px">
         <div id="our-container" style="width:100%;height:100%;overflow:hidden;display:flex;align-items:flex-start;justify-content:center">
-          <iframe id="our-frame" src="" style="border:none;transform-origin:top center;" loading="lazy" onload="resizeFrame(this, 'our')"></iframe>
+          <iframe id="our-frame" src="" style="border:none;width:100%;height:600px;" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -88,42 +105,28 @@ iframe { transition: all 0.3s ease; }
 // Frame dimensions
 const FRAME_W = 1400;
 
-function resizeFrame(frame, side) {
-  const container = frame.parentElement;
-  const containerW = container.clientWidth;
-  if (containerW < 100) return;
-  const scale = Math.min(containerW / FRAME_W, 1);
-  frame.style.width = FRAME_W + 'px';
-  frame.style.height = (600 / scale) + 'px';
-  frame.style.transform = 'scale(' + scale + ')';
-  const offset = (containerW - FRAME_W * scale) / 2;
-  frame.style.marginLeft = offset + 'px';
+function resizeFrame(frame) {
+  if (!frame) return;
+  frame.style.width = '100%';
+  frame.style.height = '600px';
+  frame.style.transform = 'none';
+  frame.style.marginLeft = '0';
 }
 
-function setDevice(btn, width) {
-  document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active', 'text-white'));
-  btn.classList.add('active', 'text-white');
-  document.getElementById('their-frame').style.width = width + 'px';
-  document.getElementById('our-frame').style.width = width + 'px';
-  ['their', 'our'].forEach(side => {
-    const frame = document.getElementById(side + '-frame');
-    if (frame && frame.src) resizeFrame(frame, side);
-  });
-}
 const BIZ = {
   "completely-wired": { name: "Completely Wired", cat: "Electrical", phone: "(812) 476-9473", their: "https://completelywiredinc.com", theirScore: 4, ourBetter: true },
   "schiff-air-conditioning-heating-inc": { name: "Schiff Air Conditioning & Heating Inc", cat: "HVAC", phone: "(812) 423-0056", their: "https://schiffair.com", theirScore: 5, ourBetter: true },
-  "hf-refrigeration-inc": { name: "HF Refrigeration Inc.", cat: "HVAC", phone: "(812) 618-3852", their: "https://hfrefrigeration.com", theirScore: 3, ourBetter: true },
-  "heads-construction": { name: "Heads Construction", cat: "Roofing", phone: "812-474-1669", their: "https://headsconstruction.com", theirScore: 5, ourBetter: true },
+  "hf-refrigeration-inc": { name: "HF Refrigeration Inc.", cat: "HVAC", phone: "(812) 618-3852", their: "https://hfrefrigeration.com", theirScore: 3, ourBetter: true, frameBlocked: true },
+  "heads-construction": { name: "Heads Construction", cat: "Roofing", phone: "812-474-1669", their: "https://headsconstruction.com", theirScore: 5, ourBetter: true, frameBlocked: true },
   "bill-s-plumbing-service": { name: "Bill's Plumbing Service", cat: "Plumbing", phone: "N/A", their: "https://bills-plumbing.com", theirScore: 4, ourBetter: true },
   "e-l-walters-air-conditioning-and-heating-inc": { name: "E. L. Walters Air Conditioning", cat: "HVAC", phone: "N/A", their: "https://elwalters.com", theirScore: 4, ourBetter: true },
   "evansville-heating-and-air-conditioning": { name: "Evansville Heating and Air Conditioning", cat: "HVAC", phone: "812-618-2659", their: "https://evansvilleheatingandair.com", theirScore: 4, ourBetter: true },
-  "nellis-lawn-landscape": { name: "Nellis Lawn & Landscape", cat: "Lawn Care", phone: "N/A", their: "https://nellislandscaping.com", theirScore: 4, ourBetter: true },
-  "mcmahon-exterminating": { name: "McMahon Exterminating", cat: "Pest Control", phone: "N/A", their: "https://mcmahoncan.com", theirScore: 6, ourBetter: true },
-  "gary-s-plumbing-service-inc": { name: "Gary's Plumbing Service Inc", cat: "Plumbing", phone: "(812) 471-3788", their: "https://garysplumbingservice.com", theirScore: 4, ourBetter: true },
-  "roto-rooter-evansville": { name: "Roto-Rooter Evansville", cat: "Plumbing", phone: "812-422-3184", their: "https://rotorooter.com", theirScore: 8, ourBetter: false },
-  "oxbow-electric-llc": { name: "Oxbow Electric, LLC", cat: "Electrical", phone: "(812) 431-8988", their: "https://oxbowelectric.com", theirScore: 7, ourBetter: false },
-  "a-derr-heating-cooling": { name: "A+ Derr Heating & Cooling", cat: "HVAC", phone: "833-232-4328", their: "https://aplusderr.com", theirScore: 7, ourBetter: false },
+  "nellis-lawn-landscape": { name: "Nellis Lawn & Landscape", cat: "Lawn Care", phone: "N/A", their: "https://nellislandscaping.com", theirScore: 4, ourBetter: true, frameBlocked: true },
+  "mcmahon-exterminating": { name: "McMahon Exterminating", cat: "Pest Control", phone: "N/A", their: "https://mcmahoncan.com", theirScore: 6, ourBetter: true, frameBlocked: true },
+  "gary-s-plumbing-service-inc": { name: "Gary's Plumbing Service Inc", cat: "Plumbing", phone: "(812) 471-3788", their: "https://garysplumbingservice.com", theirScore: 4, ourBetter: true, frameBlocked: true },
+  "roto-rooter-evansville": { name: "Roto-Rooter Evansville", cat: "Plumbing", phone: "812-422-3184", their: "https://rotorooter.com", theirScore: 8, ourBetter: false, frameBlocked: true },
+  "oxbow-electric-llc": { name: "Oxbow Electric, LLC", cat: "Electrical", phone: "(812) 431-8988", their: "https://oxbowelectric.com", theirScore: 7, ourBetter: false, frameBlocked: true },
+  "a-derr-heating-cooling": { name: "A+ Derr Heating & Cooling", cat: "HVAC", phone: "833-232-4328", their: "https://aplusderr.com", theirScore: 7, ourBetter: false, frameBlocked: true },
 };
 
 const OUR_BASE = "https://kexemi.github.io/evansville-booking-sites/apps";
@@ -155,7 +158,7 @@ window.addEventListener('resize', function() {
   ['their', 'our'].forEach(side => {
     const frame = document.getElementById(side + '-frame');
     if (frame && frame.src && frame.src !== window.location.href) {
-      resizeFrame(frame, side);
+      resizeFrame(frame);
     }
   });
 });
@@ -165,7 +168,18 @@ function loadBiz(slug) {
   if (!biz) return;
   
   // Update frames
-  document.getElementById('their-frame').src = biz.their;
+  const theirFrame = document.getElementById('their-frame');
+  const theirFallback = document.getElementById('their-fallback');
+  const theirFallbackLink = document.getElementById('their-fallback-link');
+  if (biz.frameBlocked) {
+    theirFrame.src = 'about:blank';
+    theirFallback.classList.remove('hidden');
+    theirFallbackLink.href = biz.their;
+  } else {
+    theirFallback.classList.add('hidden');
+    theirFallbackLink.removeAttribute('href');
+    theirFrame.src = biz.their;
+  }
   document.getElementById('our-frame').src = OUR_BASE + '/' + slug + '-booking.html';
   document.getElementById('their-url-label').textContent = '🌐 ' + biz.their;
   
@@ -195,19 +209,26 @@ function setDevice(btn) {
   document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active', 'text-white'));
   btn.classList.add('active', 'text-white');
   
-  const width = btn.dataset.width;
+  const width = btn.dataset.width || '100%';
   const container = document.querySelector('.grid');
+  const theirContainer = document.getElementById('their-container');
+  const ourContainer = document.getElementById('our-container');
   
   if (width === '100%') {
-    document.getElementById('their-container').style.width = '100%';
-    document.getElementById('our-container').style.width = '100%';
+    theirContainer.style.width = '100%';
+    ourContainer.style.width = '100%';
     container.classList.remove('justify-center');
   } else {
-    document.getElementById('their-container').style.width = width;
-    document.getElementById('our-container').style.width = width;
+    theirContainer.style.width = width;
+    ourContainer.style.width = width;
     container.classList.add('justify-center');
   }
+
+  ['their', 'our'].forEach(side => resizeFrame(document.getElementById(side + '-frame')));
 }
+
+document.querySelectorAll('.device-btn').forEach(btn => btn.addEventListener('click', function() { setDevice(this); }));
+document.querySelectorAll('iframe').forEach(frame => frame.addEventListener('load', function() { resizeFrame(frame); }));
 </script>
 </body>
 </html>
