@@ -217,7 +217,7 @@ function buildScenarioBundle(scope, runId) {
           viewport: vp.name, viewport_size: { width: vp.width, height: vp.height },
           url: fileUrl(compareFile, `?biz=${encodeURIComponent(slug)}`, ''),
           setup: null,
-          assertions: ['no-horizontal-overflow', 'compare-frames-visible', 'compare-loaded-business', 'compare-our-frame-matches-slug', 'device-controls-visible'],
+          assertions: ['no-horizontal-overflow', 'compare-frames-visible', 'compare-loaded-business', 'compare-our-frame-matches-slug', 'compare-our-frame-loaded', 'device-controls-visible'],
         };
         s.screenshot = scenarioScreenshotRel(s, runId).replace(/\\/g, '/');
         scenarios.push(s);
@@ -289,6 +289,32 @@ async function routeLocalPortfolioAssets(page) {
     }
     return route.continue();
   });
+}
+
+async function waitForCompareOurFrameLoaded(page, s) {
+  if (s.type !== 'compare-tool') return;
+  await page.waitForFunction((slug) => {
+    const frame = document.querySelector('#our-frame');
+    return Boolean(frame && frame.src && frame.src.includes(`${slug}-booking.html`));
+  }, s.slug, { timeout: 10000 }).catch(() => {});
+
+  const expected = `${s.slug}-booking.html`;
+  let frame = null;
+  for (let i = 0; i < 20; i += 1) {
+    frame = page.frames().find((f) => f.url().includes(expected));
+    if (frame) break;
+    await page.waitForTimeout(250);
+  }
+  if (!frame) return;
+  await frame.waitForLoadState('domcontentloaded', { timeout: 10000 }).catch(() => {});
+  await frame.locator('body').waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+  await page.waitForFunction((slug) => {
+    const iframe = document.querySelector('#our-frame');
+    if (!iframe) return false;
+    const rect = iframe.getBoundingClientRect();
+    return iframe.src.includes(`${slug}-booking.html`) && rect.width > 0 && rect.height > 200;
+  }, s.slug, { timeout: 5000 }).catch(() => {});
+  await page.waitForTimeout(400);
 }
 
 async function setupScenario(page, s) {
@@ -373,6 +399,41 @@ function isIgnorableConsoleEvent(event, scenario) {
 }
 
 async function collectAssertions(page, s, consoleEvents, screenshotAbs) {
+  let ourCompareFrameLoaded = null;
+  if (s.assertions.includes('compare-our-frame-loaded')) {
+    const expected = `${s.slug}-booking.html`;
+    const frame = page.frames().find((f) => f.url().includes(expected));
+    if (!frame) {
+      ourCompareFrameLoaded = { loaded: false, detail: `no Playwright frame URL includes ${expected}` };
+    } else {
+      try {
+        const frameDom = await frame.evaluate(() => {
+          const body = document.body;
+          const text = body ? (body.innerText || body.textContent || '') : '';
+          const visible = (selector) => {
+            const el = document.querySelector(selector);
+            if (!el) return false;
+            const cs = window.getComputedStyle(el);
+            const r = el.getBoundingClientRect();
+            return cs.display !== 'none' && cs.visibility !== 'hidden' && r.width > 0 && r.height > 0;
+          };
+          return {
+            title: document.title || '',
+            textLength: text.trim().length,
+            hasHero: visible('.hero') || visible('header'),
+            hasBookingForm: visible('#booking-form'),
+            hasPrimaryCta: Array.from(document.querySelectorAll('a,button')).some((el) => /book|call|contact/i.test(el.innerText || el.textContent || '') && el.getBoundingClientRect().width > 0),
+            bodyTextSample: text.trim().slice(0, 160),
+          };
+        });
+        const loaded = frameDom.textLength > 100 && (frameDom.hasHero || frameDom.hasBookingForm || frameDom.hasPrimaryCta);
+        ourCompareFrameLoaded = { loaded, detail: JSON.stringify(frameDom) };
+      } catch (err) {
+        ourCompareFrameLoaded = { loaded: false, detail: `frame inspection failed: ${err.message || err}` };
+      }
+    }
+  }
+
   const dom = await page.evaluate((scenario) => {
     const html = document.documentElement.outerHTML;
     const body = document.body;
@@ -461,6 +522,7 @@ async function collectAssertions(page, s, consoleEvents, screenshotAbs) {
   if (s.assertions.includes('compare-frames-visible')) add('compare-frames-visible', dom.compareFrames >= 2, `${dom.compareFrames} iframes`);
   if (s.assertions.includes('compare-loaded-business')) add('compare-loaded-business', dom.compareBizInfoVisible && dom.compareSelectedBiz === s.slug, `selected=${dom.compareSelectedBiz}; infoVisible=${dom.compareBizInfoVisible}; name=${dom.compareBizNameText}`);
   if (s.assertions.includes('compare-our-frame-matches-slug')) add('compare-our-frame-matches-slug', dom.compareOurFrameSrc.includes(`${s.slug}-booking.html`), dom.compareOurFrameSrc);
+  if (s.assertions.includes('compare-our-frame-loaded')) add('compare-our-frame-loaded', ourCompareFrameLoaded && ourCompareFrameLoaded.loaded, ourCompareFrameLoaded ? ourCompareFrameLoaded.detail : 'not evaluated');
   if (s.assertions.includes('device-controls-visible')) add('device-controls-visible', /desktop/i.test(dom.deviceControls) && /tablet/i.test(dom.deviceControls) && /mobile/i.test(dom.deviceControls), dom.deviceControls);
   if (s.assertions.includes('link-list-visible')) add('link-list-visible', dom.linkCount >= 3, `${dom.linkCount} links`);
 
@@ -523,6 +585,7 @@ async function runMatrix(args) {
         await page.goto(s.url, { waitUntil: 'domcontentloaded', timeout: 20000 });
         await waitForPageReady(page);
         await setupScenario(page, s);
+        await waitForCompareOurFrameLoaded(page, s);
         await page.screenshot({ path: screenshotAbs, fullPage: true });
         results.push(await collectAssertions(page, s, consoleEvents, screenshotAbs));
       } catch (err) {

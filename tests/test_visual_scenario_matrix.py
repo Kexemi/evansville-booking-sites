@@ -110,6 +110,8 @@ def test_compare_matrix_only_enumerates_loadable_compare_businesses():
     assert len(compare_scenarios) == len(compare_slugs) * 2
     assert all("compare-loaded-business" in s["assertions"] for s in compare_scenarios)
     assert all("compare-our-frame-matches-slug" in s["assertions"] for s in compare_scenarios)
+    assert all("compare-our-frame-loaded" in s["assertions"] for s in compare_scenarios)
+    assert "ourCompareFrameLoaded" in SCRIPT.read_text(encoding="utf-8", errors="ignore")
     compare_gap_slugs = {g["slug"] for g in data.get("capability_gaps", []) if g.get("capability") == "compare-tool"}
     assert compare_gap_slugs == app_slugs - biz_slugs
     assert "1st-patriot-painting-llc" in compare_gap_slugs
