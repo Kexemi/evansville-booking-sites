@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiet Systems — AI Adoption Bridge</title>
+  <meta name="description" content="Static local demo for a stepwise AI adoption bridge: intake, assistant, searchable business brain, data acclimation, and workflow automation.">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <div class="brand"><div class="brand-mark">QS</div><span>Quiet Systems</span></div>
+      <div class="nav-links">
+        <a href="#ladder">Ladder</a>
+        <a href="#workbench">Readiness quiz</a>
+        <a href="#inventory">Demo inventory</a>
+        <a href="#packages">Offer ladder</a>
+        <a href="#brief">Prospect brief</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero-shell shell">
+    <div class="hero-grid">
+      <section>
+        <div class="eyebrow">AI Adoption Bridge · Storefront v1</div>
+        <h1>Turn AI hype into a controlled operating layer.</h1>
+        <p class="lede">Most companies are still using AI as a personal productivity toy. Quiet Systems sells the bridge: clean intake, searchable business knowledge, measured data acclimation, then gated workflow automation when the proof is real.</p>
+        <div class="hero-actions">
+          <a class="cta" href="#workbench">Readiness quiz + Time-return calculator</a>
+          <a class="ghost" href="#inventory">See demo inventory</a>
+        </div>
+        <p class="truth-note"><strong>Truth boundary:</strong> this is a static proof snapshot. Impact math is an estimate, not a guarantee. Public deploy, buyer contact, external sends, spend, and credential work still require owner approval.</p>
+        <div class="badge-row">
+          <span class="badge">No backend</span>
+          <span class="badge">No external scripts</span>
+          <span class="badge">Phone-readable</span>
+          <span class="badge">Owner-gated autonomy</span>
+        </div>
+      </section>
+      <aside class="hero-card signal-card" aria-label="AI adoption signal dashboard">
+        <div class="signal-row"><div class="level-pill">88%</div><div><strong>Still early</strong><small>Industry estimate: most teams live at Level 1–2 — drafting, brainstorming, summarizing.</small></div><div class="status">Wedge</div></div>
+        <div class="signal-row"><div class="level-pill">2×</div><div><strong>Leader/user confidence gap</strong><small>Executives often think adoption is further along than daily users do.</small></div><div class="status">Audit</div></div>
+        <div class="signal-row"><div class="level-pill">L3</div><div><strong>Workflow AI is the sale</strong><small>Move from scattered tools to recurring, measured workflows.</small></div><div class="status ok">Route</div></div>
+        <div class="signal-row"><div class="level-pill">G</div><div><strong>Governance is the trust unlock</strong><small>Approval gates, measurements, and source-grounding beat vague agent hype.</small></div><div class="status ok">Safe</div></div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="ladder" class="section shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Route to market</div>
+          <h2>The maturity ladder becomes the offer ladder.</h2>
+        </div>
+        <p>Sell the next safe rung, not a fantasy of instant autonomous replacement.</p>
+      </div>
+      <div class="card-grid">
+        <article class="stage-card" data-stage="0"><h3>AI-ready foundation</h3><p>Before deep AI, capture the messy business reality: requests, policies, service data, repeated questions, and owner decisions.</p><ul><li>Structured intake</li><li>Clean fields</li><li>Owner export</li></ul></article>
+        <article class="stage-card" data-stage="1"><h3>Thought partner</h3><p>Individuals use generic AI for drafts, summaries, ideas, and quick analysis.</p><ul><li>Low coordination</li><li>No source control</li><li>No business memory</li></ul></article>
+        <article class="stage-card" data-stage="2"><h3>Controlled assistant</h3><p>AI answers from approved company context and hands off leads or uncertain cases.</p><ul><li>FAQ assistant</li><li>Website chat</li><li>Approved knowledge</li></ul></article>
+        <article class="stage-card" data-stage="3"><h3>Workflow teammate</h3><p>AI helps with repeatable processes: intake triage, follow-up drafts, reports, and quote prep.</p><ul><li>Human approvals</li><li>Metrics</li><li>Repeatable loops</li></ul></article>
+        <article class="stage-card" data-stage="4"><h3>Gated operating system</h3><p>Agents run bounded business processes only after reliability, rollback, and governance are proven.</p><ul><li>Approval gates</li><li>Receipts</li><li>Measured reliability</li></ul></article>
+      </div>
+    </section>
+
+    <section id="workbench" class="section shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Readiness quiz + Time-return calculator</div>
+          <h2>Diagnose the buyer and make the value visible.</h2>
+        </div>
+        <p>One screen turns vague AI interest into a specific, safe starting package.</p>
+      </div>
+      <div class="workbench">
+        <section class="panel">
+          <h3>Company inputs</h3>
+          <div class="control"><label for="companyName">Company name</label><input id="companyName" type="text" value="Example local service company"></div>
+          <div class="control"><label for="aiUse">Current AI use <span data-output="aiUse">1</span></label><input id="aiUse" type="range" min="1" max="5" value="2"></div>
+          <div class="control"><label for="dataClarity">Data clarity <span data-output="dataClarity">1</span></label><input id="dataClarity" type="range" min="1" max="5" value="2"></div>
+          <div class="control"><label for="workflowRepeatability">Workflow repeatability <span data-output="workflowRepeatability">1</span></label><input id="workflowRepeatability" type="range" min="1" max="5" value="3"></div>
+          <div class="control"><label for="governance">Approval/governance maturity <span data-output="governance">1</span></label><input id="governance" type="range" min="1" max="5" value="2"></div>
+          <div class="control"><label for="urgency">Urgency <span data-output="urgency">1</span></label><input id="urgency" type="range" min="1" max="5" value="4"></div>
+          <h3>Time-return assumptions</h3>
+          <div class="control"><label for="wastedHours">Repeated admin hours wasted per week</label><input id="wastedHours" type="number" value="8" min="0" max="80"></div>
+          <div class="control"><label for="captureRate">Percent realistically captured (your assumption) <span data-output="captureRate">35%</span></label><input id="captureRate" type="range" min="5" max="80" value="35"></div>
+          <div class="control"><label for="hourlyValue">Blended hourly value</label><input id="hourlyValue" type="number" value="75" min="0" max="1000"></div>
+        </section>
+        <section class="result-box" aria-live="polite">
+          <small id="diagnosisScore">0/20 readiness score</small>
+          <h3 id="diagnosisLevel">Level 1</h3>
+          <p id="diagnosisTitle">AI as scattered thought partner</p>
+          <h3 id="recommendedPackage">Intake + AI-ready data layer</h3>
+          <p id="nextStep">Start with structured capture.</p>
+          <p id="urgencyNote">Urgency note.</p>
+          <div class="metric-row">
+            <div class="metric"><small>Weekly</small><strong id="weeklyHours">0h</strong></div>
+            <div class="metric"><small>Monthly</small><strong id="monthlyHours">0h</strong></div>
+            <div class="metric"><small>Year value</small><strong id="yearlyValue">$0</strong></div>
+          </div>
+          <small id="impactDisclaimer">This is an estimate, not a guarantee.</small>
+          <hr>
+          <strong id="selectedPackageName">Package</strong>
+          <p id="selectedPackageDetail">Package detail.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="inventory" class="section shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Demo inventory</div>
+          <h2>Stock the store before opening it.</h2>
+        </div>
+        <p>Enough visible product surfaces to make the offer feel real before the first buyer contact.</p>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-card" data-demo="intake"><div class="demo-icon">01</div><h3>AI-ready intake</h3><p>Mobile request capture with service type, urgency, contact details, photos, and exportable owner summary.</p><ul><li>Low trust barrier</li><li>Clean future training data</li></ul></article>
+        <article class="demo-card" data-demo="assistant"><div class="demo-icon">02</div><h3>Website AI assistant</h3><p>Controlled chat/FAQ that answers from approved business content and routes uncertain cases to contact.</p><ul><li>Lead handoff</li><li>Transcript review</li></ul></article>
+        <article class="demo-card" data-demo="brain"><div class="demo-icon">03</div><h3>Searchable business brain</h3><p>Source-grounded SOP, policy, service, and customer-question library that makes owner knowledge retrievable.</p><ul><li>Citations</li><li>Update workflow</li></ul></article>
+        <article class="demo-card" data-demo="data"><div class="demo-icon">04</div><h3>Data acclimation pipeline</h3><p>Weekly capture and labeling loop that turns messy calls/forms/docs into automation-ready signal.</p><ul><li>Impact report</li><li>Readiness score</li></ul></article>
+        <article class="demo-card" data-demo="workflow"><div class="demo-icon">05</div><h3>Workflow automation</h3><p>Bounded agents draft follow-ups, quote summaries, schedule options, and reports behind human approval gates.</p><ul><li>No blind sends</li><li>Receipts + rollback</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="workbench">
+        <section class="panel">
+          <div class="eyebrow">Searchable business brain mini-demo</div>
+          <h2>Ask the demo brain.</h2>
+          <p>Type a buyer question and see source-grounded answers with citations.</p>
+          <div class="brain-search">
+            <input class="search-box" id="brainQuery" value="after hours emergency booking" aria-label="Search the demo business brain">
+            <button class="mini-btn" id="searchButton">Search</button>
+          </div>
+          <div class="search-results" id="searchResults"></div>
+        </section>
+        <section class="panel">
+          <div class="eyebrow">Why this wins</div>
+          <h2>The buyer does not need to believe in AGI.</h2>
+          <p>They only need to believe that repeated dropped details, manual follow-ups, and undocumented knowledge are costing money. The first sale is the bridge, not the moonshot.</p>
+          <div class="badge-row">
+            <span class="badge">Practical AI</span><span class="badge">Measured impact</span><span class="badge">Governed workflows</span><span class="badge">Upgrade path</span>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="packages" class="section shell">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Offer ladder</div>
+          <h2>Four packages, one route.</h2>
+        </div>
+        <p>Draft owner-facing product shelf; external prices/scope need separate approval.</p>
+      </div>
+      <div class="package-grid">
+        <article class="package-card" data-package="intake"><h3>Intake + AI-ready data layer</h3><p>A strong first wedge for local service companies and small teams (example packaging).</p><p><strong>Draft:</strong> setup + maintenance model.</p><button class="package-btn">Select intake</button></article>
+        <article class="package-card" data-package="assistant"><h3>Website AI assistant + FAQ brain</h3><p>Answers known questions, collects leads, and avoids hallucinated commitments.</p><p><strong>Draft:</strong> chat plus transcript review.</p><button class="package-btn">Select assistant</button></article>
+        <article class="package-card" data-package="brain"><h3>Business brain + acclimation</h3><p>Source library, update process, weekly report, and automation prep.</p><p><strong>Draft:</strong> monthly operating layer.</p><button class="package-btn">Select brain</button></article>
+        <article class="package-card" data-package="ops"><h3>Workflow automation / agentic ops</h3><p>Gated agents for recurring admin, follow-up, reporting, and quote prep.</p><p><strong>Draft:</strong> deeper build after proof.</p><button class="package-btn">Select ops</button></article>
+      </div>
+    </section>
+
+    <section id="brief" class="section shell brief-panel">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Copy prospect brief</div>
+          <h2>One-screen sales primitive.</h2>
+        </div>
+        <p>Use this internally to turn a prospect into a specific next-step recommendation.</p>
+      </div>
+      <textarea id="prospectBrief" aria-label="Generated prospect brief"></textarea>
+      <button class="copy-btn" id="copyBrief">Copy prospect brief</button>
+      <p id="copyStatus" class="truth-note"></p>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <strong>Quiet Systems AI Adoption Bridge.</strong> Static proof snapshot. No buyer data collected. Estimates, not guarantees. Invite-only pilot — reply to the message that brought you here.
+  </footer>
+
+  <script src="./src/engine.js"></script>
+  <script src="./src/app.js"></script>
+</body>
+</html>
